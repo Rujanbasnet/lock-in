@@ -79,7 +79,7 @@ export default function Dashboard() {
 
         {/* Performance Metrics - Mission Control Style */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Card className="border-border/50 bg-gradient-to-br from-card to-card/50 hover:border-primary/50 transition-all">
+          <Card className="border-border/50 bg-gradient-to-br from-card to-card/50 hover:border-primary/50 transition-all" data-testid="card-lock-in-time">
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-3">
                 <p className="text-xs font-mono font-bold text-muted-foreground uppercase tracking-wider">
@@ -87,12 +87,12 @@ export default function Dashboard() {
                 </p>
                 <Timer className="h-4 w-4 text-primary" />
               </div>
-              <p className="text-4xl font-mono font-black text-foreground mb-1">04:32:18</p>
+              <p className="text-4xl font-mono font-black text-foreground mb-1" data-testid="text-lock-in-time">04:32:18</p>
               <p className="text-xs text-muted-foreground font-mono">Today's total execution time</p>
             </CardContent>
           </Card>
 
-          <Card className="border-border/50 bg-gradient-to-br from-card to-card/50 hover:border-secondary/50 transition-all">
+          <Card className="border-border/50 bg-gradient-to-br from-card to-card/50 hover:border-secondary/50 transition-all" data-testid="card-deep-creative-time">
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-3">
                 <p className="text-xs font-mono font-bold text-muted-foreground uppercase tracking-wider">
@@ -100,12 +100,12 @@ export default function Dashboard() {
                 </p>
                 <Target className="h-4 w-4 text-secondary" />
               </div>
-              <p className="text-4xl font-mono font-black text-foreground mb-1">02:45:30</p>
+              <p className="text-4xl font-mono font-black text-foreground mb-1" data-testid="text-deep-creative-time">02:45:30</p>
               <p className="text-xs text-muted-foreground font-mono">High-intensity work modes</p>
             </CardContent>
           </Card>
 
-          <Card className="border-border/50 bg-gradient-to-br from-card to-card/50 hover:border-destructive/50 transition-all">
+          <Card className="border-border/50 bg-gradient-to-br from-card to-card/50 hover:border-destructive/50 transition-all" data-testid="card-streak">
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-3">
                 <p className="text-xs font-mono font-bold text-muted-foreground uppercase tracking-wider">
@@ -113,7 +113,7 @@ export default function Dashboard() {
                 </p>
                 <Flame className="h-4 w-4 text-destructive" />
               </div>
-              <p className="text-4xl font-mono font-black text-foreground mb-1">7 Days</p>
+              <p className="text-4xl font-mono font-black text-foreground mb-1" data-testid="text-streak">7 Days</p>
               <p className="text-xs text-muted-foreground font-mono">Consecutive lock-ins</p>
             </CardContent>
           </Card>

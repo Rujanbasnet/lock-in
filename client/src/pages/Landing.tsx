@@ -141,16 +141,16 @@ export default function Landing() {
 
           {/* Social Proof / Stats */}
           <div className="grid grid-cols-3 gap-8 pt-16 max-w-2xl mx-auto border-t border-border/50">
-            <div className="text-center space-y-2 pt-8">
-              <div className="text-4xl font-mono font-black text-primary">180px</div>
+            <div className="text-center space-y-2 pt-8" data-testid="stat-timer-size">
+              <div className="text-4xl font-mono font-black text-primary" data-testid="text-timer-size">180px</div>
               <div className="text-xs text-muted-foreground uppercase tracking-wide font-mono">Timer Font Size</div>
             </div>
-            <div className="text-center space-y-2 pt-8">
-              <div className="text-4xl font-mono font-black text-secondary">Real-Time</div>
+            <div className="text-center space-y-2 pt-8" data-testid="stat-tracking">
+              <div className="text-4xl font-mono font-black text-secondary" data-testid="text-tracking">Real-Time</div>
               <div className="text-xs text-muted-foreground uppercase tracking-wide font-mono">Millisecond Tracking</div>
             </div>
-            <div className="text-center space-y-2 pt-8">
-              <div className="text-4xl font-mono font-black text-chart-4">$5/mo</div>
+            <div className="text-center space-y-2 pt-8" data-testid="stat-pricing">
+              <div className="text-4xl font-mono font-black text-chart-4" data-testid="text-pricing">$5/mo</div>
               <div className="text-xs text-muted-foreground uppercase tracking-wide font-mono">After Trial</div>
             </div>
           </div>

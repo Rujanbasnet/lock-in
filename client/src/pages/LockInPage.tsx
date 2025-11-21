@@ -19,14 +19,14 @@ export default function LockInPage() {
 
       {/* Status Indicators - Corners */}
       <div className="absolute top-4 left-4 z-10">
-        <Badge variant="outline" className="border-primary/50 text-primary font-mono text-xs uppercase tracking-wider">
+        <Badge variant="outline" className="border-primary/50 text-primary font-mono text-xs uppercase tracking-wider" data-testid="badge-session-active">
           <Lock className="h-3 w-3 mr-1 animate-pulse" />
           Active
         </Badge>
       </div>
       
       <div className="absolute top-4 right-4 z-10">
-        <Badge variant="outline" className="border-chart-4/50 text-chart-4 font-mono text-xs uppercase tracking-wider">
+        <Badge variant="outline" className="border-chart-4/50 text-chart-4 font-mono text-xs uppercase tracking-wider" data-testid="badge-mode-deep-work">
           <Zap className="h-3 w-3 mr-1" />
           Deep Work
         </Badge>
@@ -39,7 +39,7 @@ export default function LockInPage() {
           <p className="text-sm md:text-base font-mono text-muted-foreground uppercase tracking-widest mb-2">
             Current Mission
           </p>
-          <h1 className="text-2xl md:text-4xl font-black tracking-tight leading-tight">
+          <h1 className="text-2xl md:text-4xl font-black tracking-tight leading-tight" data-testid="text-current-intention">
             Build the feature. Ship it today.
           </h1>
         </div>
@@ -50,13 +50,13 @@ export default function LockInPage() {
         </div>
 
         {/* Intensity Meter */}
-        <div className="mt-12 w-full max-w-md">
+        <div className="mt-12 w-full max-w-md" data-testid="intensity-meter">
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs font-mono text-muted-foreground uppercase tracking-wider">
               <span>Intensity</span>
-              <span>87%</span>
+              <span data-testid="text-intensity-percentage">87%</span>
             </div>
-            <div className="h-2 bg-border rounded-full overflow-hidden">
+            <div className="h-2 bg-border rounded-full overflow-hidden" role="progressbar" aria-valuenow={87} aria-valuemin={0} aria-valuemax={100} aria-label="Focus intensity">
               <div className="h-full bg-gradient-to-r from-primary via-secondary to-destructive w-[87%] 
                            rounded-full animate-pulse" />
             </div>
@@ -69,7 +69,7 @@ export default function LockInPage() {
 
         {/* Contextual Mantra */}
         <div className="mt-12 text-center">
-          <p className="text-sm font-mono text-primary uppercase tracking-wide">
+          <p className="text-sm font-mono text-primary uppercase tracking-wide" data-testid="text-mantra">
             "Stay ruthless for 47 more minutes"
           </p>
         </div>
@@ -80,15 +80,15 @@ export default function LockInPage() {
         <div className="max-w-7xl mx-auto grid grid-cols-3 gap-4 text-center">
           <div>
             <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-1">Session</p>
-            <p className="text-base font-mono font-bold">00:47:32</p>
+            <p className="text-base font-mono font-bold" data-testid="text-session-time">00:47:32</p>
           </div>
           <div>
             <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-1">Today</p>
-            <p className="text-base font-mono font-bold">04:32:18</p>
+            <p className="text-base font-mono font-bold" data-testid="text-today-time">04:32:18</p>
           </div>
           <div>
             <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-1">Streak</p>
-            <p className="text-base font-mono font-bold text-destructive">7 Days</p>
+            <p className="text-base font-mono font-bold text-destructive" data-testid="text-streak-days">7 Days</p>
           </div>
         </div>
       </div>
