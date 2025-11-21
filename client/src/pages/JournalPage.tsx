@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { PageHeader } from "@/components/PageHeader";
 import { Calendar, Target, BookOpen } from "lucide-react";
 import { useState } from "react";
 
@@ -30,18 +31,11 @@ export default function JournalPage() {
 
   return (
     <div className="h-full overflow-auto">
-      {/* Header */}
-      <div className="bg-gradient-to-br from-accent/20 via-background to-primary/10 px-8 py-12 border-b border-border">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex items-center gap-2 mb-4">
-            <BookOpen className="h-6 w-6 text-accent" />
-            <h1 className="text-4xl font-serif font-bold">Reflect on Your Session</h1>
-          </div>
-          <p className="text-lg text-muted-foreground">
-            Compare your intention with what you accomplished. What worked? What didn't?
-          </p>
-        </div>
-      </div>
+      <PageHeader 
+        icon={<BookOpen className="h-6 w-6 text-secondary" />}
+        title="Debrief & Reflect"
+        description="Compare your intention with what you accomplished. What worked? What didn't? Stay honest, stay ruthless."
+      />
 
       <div className="max-w-4xl mx-auto p-8 space-y-8">
         {/* Your Intention */}

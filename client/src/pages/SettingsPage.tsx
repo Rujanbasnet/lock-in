@@ -3,6 +3,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
+import { PageHeader } from "@/components/PageHeader";
+import { Settings } from "lucide-react";
 import { useState } from "react";
 
 export default function SettingsPage() {
@@ -11,13 +13,13 @@ export default function SettingsPage() {
 
   return (
     <div className="h-full overflow-auto">
-      <div className="max-w-3xl mx-auto p-8 space-y-8">
-        <div>
-          <h1 className="text-4xl font-serif font-medium mb-2">Settings</h1>
-          <p className="text-muted-foreground">
-            Customize your digital wellness experience
-          </p>
-        </div>
+      <PageHeader 
+        icon={<Settings className="h-6 w-6 text-muted-foreground" />}
+        title="Settings"
+        description="Configure your Lock In experience and manage your account."
+      />
+      
+      <div className="max-w-3xl mx-auto p-6 md:p-8 space-y-6 md:space-y-8">
 
         <Card>
           <CardHeader>

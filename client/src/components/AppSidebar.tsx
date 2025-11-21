@@ -33,14 +33,14 @@ const menuItems = [
     icon: Target,
   },
   {
-    title: "Activity Log",
-    url: "/activities",
-    icon: Activity,
-  },
-  {
     title: "Journal",
     url: "/journal",
     icon: BookOpen,
+  },
+  {
+    title: "Activity Log",
+    url: "/activities",
+    icon: Activity,
   },
   {
     title: "Settings",

@@ -70,7 +70,7 @@ function Router() {
 
 export default function App() {
   const style = {
-    "--sidebar-width": "16rem",
+    "--sidebar-width": "13rem",
     "--sidebar-width-icon": "3rem",
   };
 

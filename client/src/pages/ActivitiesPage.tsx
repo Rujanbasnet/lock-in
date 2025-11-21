@@ -1,5 +1,7 @@
 import { ActivityLogger } from "@/components/ActivityLogger";
 import { ActivityTimeline } from "@/components/ActivityTimeline";
+import { PageHeader } from "@/components/PageHeader";
+import { Activity } from "lucide-react";
 
 export default function ActivitiesPage() {
   const mockActivities = [
@@ -39,13 +41,13 @@ export default function ActivitiesPage() {
 
   return (
     <div className="h-full overflow-auto">
-      <div className="max-w-7xl mx-auto p-8 space-y-8">
-        <div>
-          <h1 className="text-4xl font-serif font-medium mb-2">Your Lock In Activity</h1>
-          <p className="text-muted-foreground">
-            See exactly how you locked in today. Track your Deep Work, Creative, Social, and Rest sessions throughout the day.
-          </p>
-        </div>
+      <PageHeader 
+        icon={<Activity className="h-6 w-6 text-chart-4" />}
+        title="Activity Log"
+        description="See exactly how you locked in today. Track your Deep Work, Creative, Social, and Rest sessions throughout the day."
+      />
+      
+      <div className="max-w-7xl mx-auto p-6 md:p-8 space-y-6 md:space-y-8">
 
         <div className="grid lg:grid-cols-3 gap-6">
           <div className="lg:col-span-1">
