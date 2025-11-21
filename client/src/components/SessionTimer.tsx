@@ -94,18 +94,30 @@ export function SessionTimer() {
   }, [isRunning, currentMode]);
 
   const handleModeChange = (modeId: string) => {
-    if (currentMode && currentMode !== modeId && isRunning) {
+    const newModeData = modes.find((m) => m.id === modeId);
+    const currentModeIsFocus = currentMode 
+      ? modes.find((m) => m.id === currentMode)?.isFocusTime 
+      : null;
+    const newModeIsFocus = newModeData?.isFocusTime;
+
+    // Record previous mode history
+    if (currentMode && currentMode !== modeId) {
       setModeHistory([
         ...modeHistory,
         { mode: currentMode, duration: modeTimers[currentMode], startedAt: Date.now() },
       ]);
     }
+
+    // Switch to new mode
     setCurrentMode(modeId);
+
+    // Auto-start if not running
     if (!isRunning) {
       setIsRunning(true);
       if (!sessionStartTime) setSessionStartTime(Date.now());
     }
-    console.log(`Locked in: ${modes.find((m) => m.id === modeId)?.label}`);
+
+    console.log(`Locked in: ${newModeData?.label}`);
   };
 
   const handleStart = () => {
@@ -283,17 +295,14 @@ export function SessionTimer() {
               <button
                 key={mode.id}
                 onClick={() => handleModeChange(mode.id)}
-                disabled={isRunning && !isActive}
                 data-testid={`button-mode-${mode.id}`}
                 className={`
                   relative overflow-hidden rounded-lg border transition-all p-4
-                  hover-elevate active-elevate-2
+                  hover-elevate active-elevate-2 cursor-pointer
                   ${
                     isActive
                       ? `border-2 border-current ${mode.bgGlow} ring-2 ring-offset-2 ring-offset-background ring-current shadow-lg`
-                      : isRunning
-                        ? "opacity-40 cursor-not-allowed border-border"
-                        : "border-border hover:border-border/50"
+                      : "border-border hover:border-border/50"
                   }
                 `}
               >
