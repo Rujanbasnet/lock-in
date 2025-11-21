@@ -3,7 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useAuth } from "@/hooks/useAuth";
@@ -32,6 +32,30 @@ function AuthenticatedRouter() {
   );
 }
 
+function AuthenticatedContent() {
+  const { state } = useSidebar();
+  const isCollapsed = state === "collapsed";
+
+  return (
+    <>
+      <AppSidebar />
+      {isCollapsed && (
+        <SidebarTrigger
+          data-testid="button-sidebar-expand"
+          className="fixed left-0 top-1/2 -translate-y-1/2 z-40 w-1 hover:w-8 h-20 transition-all duration-200 opacity-0 hover:opacity-100 bg-primary/20 hover:bg-primary/40 rounded-r-lg flex items-center justify-center group"
+        >
+          <span className="text-xs font-bold text-primary opacity-0 group-hover:opacity-100">{'>'}</span>
+        </SidebarTrigger>
+      )}
+      <div className="flex flex-col flex-1 min-w-0 w-full">
+        <main className="flex-1 overflow-hidden w-full">
+          <AuthenticatedRouter />
+        </main>
+      </div>
+    </>
+  );
+}
+
 function Router() {
   const { isAuthenticated, isLoading } = useAuth();
 
@@ -52,16 +76,7 @@ function Router() {
     );
   }
 
-  return (
-    <>
-      <AppSidebar />
-      <div className="flex flex-col flex-1 min-w-0 w-full">
-        <main className="flex-1 overflow-hidden w-full">
-          <AuthenticatedRouter />
-        </main>
-      </div>
-    </>
-  );
+  return <AuthenticatedContent />;
 }
 
 export default function App() {

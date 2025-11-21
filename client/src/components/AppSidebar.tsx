@@ -97,7 +97,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="p-3 border-t border-sidebar-border space-y-3">
+      <SidebarFooter className="p-3 border-t border-sidebar-border">
         <div className="flex items-center gap-3 rounded-md border border-sidebar-border p-3 bg-sidebar-accent/30">
           <div className="h-10 w-10 rounded-md bg-primary/20 flex items-center justify-center border border-primary/30">
             <span className="text-sm font-mono font-bold text-primary">JD</span>
@@ -109,12 +109,6 @@ export function AppSidebar() {
             </div>
           </div>
         </div>
-        <SidebarTrigger 
-          data-testid="button-sidebar-toggle"
-          className="w-full h-8 font-mono text-sm font-bold"
-        >
-          {isCollapsed ? ">>" : "<<"}
-        </SidebarTrigger>
       </SidebarFooter>
     </Sidebar>
   );
