@@ -102,7 +102,7 @@ export default function Landing() {
 
 
           {/* Social Proof / Stats */}
-          <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-12 pt-16 max-w-4xl mx-auto border-t border-border/50 px-4">
+          <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-12 pt-16 max-w-4xl border-t border-border/50">
             <div className="text-center space-y-2 pt-8 flex-1" data-testid="stat-timer-size">
               <div className="text-4xl font-mono font-black text-primary" data-testid="text-timer-size">180px</div>
               <div className="text-xs text-muted-foreground uppercase tracking-wide font-mono">Timer Font Size</div>
