@@ -69,7 +69,7 @@ function AuthenticatedContent() {
       {isCollapsed && (
         <SidebarTrigger
           data-testid="button-sidebar-expand"
-          className="fixed left-0 top-1/2 -translate-y-1/2 z-40 w-1 hover:w-8 h-20 transition-all duration-200 opacity-0 hover:opacity-100 bg-primary/20 hover:bg-primary/40 rounded-r-lg flex items-center justify-center group"
+          className="fixed left-0 top-0 z-40 w-16 h-screen transition-all duration-200 opacity-0 hover:opacity-100 bg-primary/10 hover:bg-primary/20 flex items-center justify-center group cursor-pointer"
         >
           <span className="text-xs font-bold text-primary opacity-0 group-hover:opacity-100">{'>'}</span>
         </SidebarTrigger>
