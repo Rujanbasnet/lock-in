@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Zap, Target, BarChart3, Lock, ArrowRight } from "lucide-react";
 import { LockInLogo } from "@/components/LockInLogo";
+import workspaceImg from "@assets/generated_images/developer_focused_at_workstation.png";
 
 export default function Landing() {
   return (
@@ -25,13 +26,22 @@ export default function Landing() {
 
       {/* Hero */}
       <div className="flex-1 flex items-center justify-center px-4 py-20 relative overflow-hidden">
-        {/* Animated background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-secondary/10 animate-gradient" />
+        {/* Background workspace imagery */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-[0.12]"
+          style={{ backgroundImage: `url(${workspaceImg})` }}
+        />
+        
+        {/* Dark gradient overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background/90 via-background/80 to-background/95" />
+        
+        {/* Animated gradient accent */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 animate-gradient" />
         
         {/* Grid overlay for tech aesthetic */}
-        <div className="absolute inset-0 opacity-20" 
+        <div className="absolute inset-0 opacity-[0.08]" 
              style={{
-               backgroundImage: 'linear-gradient(rgba(0, 217, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 217, 255, 0.1) 1px, transparent 1px)',
+               backgroundImage: 'linear-gradient(rgba(0, 217, 255, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 217, 255, 0.3) 1px, transparent 1px)',
                backgroundSize: '50px 50px'
              }} 
         />
