@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Brain, Palette, Users, Moon, Play, Pause, RotateCcw } from "lucide-react";
+import { Brain, Palette, Zap, Users, Moon, Coffee, Play, Pause, RotateCcw } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const modes = [
@@ -11,7 +11,7 @@ const modes = [
     color: "from-chart-1 to-chart-1/70",
     textColor: "text-chart-1",
     bgGlow: "bg-chart-1/10",
-    countsToCoreTime: true,
+    isFocusTime: true,
   },
   {
     id: "creative",
@@ -20,7 +20,16 @@ const modes = [
     color: "from-chart-2 to-chart-2/70",
     textColor: "text-chart-2",
     bgGlow: "bg-chart-2/10",
-    countsToCoreTime: true,
+    isFocusTime: true,
+  },
+  {
+    id: "flow",
+    label: "Flow",
+    icon: Zap,
+    color: "from-primary to-primary/70",
+    textColor: "text-primary",
+    bgGlow: "bg-primary/10",
+    isFocusTime: true,
   },
   {
     id: "social",
@@ -29,7 +38,16 @@ const modes = [
     color: "from-chart-3 to-chart-3/70",
     textColor: "text-chart-3",
     bgGlow: "bg-chart-3/10",
-    countsToCoreTime: false,
+    isFocusTime: false,
+  },
+  {
+    id: "break",
+    label: "Break",
+    icon: Coffee,
+    color: "from-secondary to-secondary/70",
+    textColor: "text-secondary",
+    bgGlow: "bg-secondary/10",
+    isFocusTime: false,
   },
   {
     id: "rest",
@@ -38,7 +56,7 @@ const modes = [
     color: "from-chart-4 to-chart-4/70",
     textColor: "text-chart-4",
     bgGlow: "bg-chart-4/10",
-    countsToCoreTime: false,
+    isFocusTime: false,
   },
 ];
 
@@ -48,7 +66,9 @@ export function SessionTimer() {
   const [modeTimers, setModeTimers] = useState<Record<string, number>>({
     "deep-work": 0,
     creative: 0,
+    flow: 0,
     social: 0,
+    break: 0,
     rest: 0,
   });
   const [currentMode, setCurrentMode] = useState<string | null>(null);
@@ -103,25 +123,29 @@ export function SessionTimer() {
     setModeTimers({
       "deep-work": 0,
       creative: 0,
+      flow: 0,
       social: 0,
+      break: 0,
       rest: 0,
     });
     setSessionStartTime(null);
   };
 
-  // Main timer with milliseconds
-  const totalSeconds = Math.floor(totalMilliseconds / 1000);
-  const milliseconds = Math.floor((totalMilliseconds % 1000) / 10);
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
+  // Focus Time (Deep Work + Creative + Flow)
+  const focusMilliseconds = modeTimers["deep-work"] + modeTimers.creative + modeTimers.flow;
+  const focusSeconds = Math.floor(focusMilliseconds / 1000);
+  const focusMillisecondsOnly = Math.floor((focusMilliseconds % 1000) / 10);
+  const focusHours = Math.floor(focusSeconds / 3600);
+  const focusMinutes = Math.floor((focusSeconds % 3600) / 60);
+  const focusSecsOnly = focusSeconds % 60;
 
-  // Lock In Time (Deep Work + Creative only)
-  const lockInMilliseconds = modeTimers["deep-work"] + modeTimers.creative;
-  const lockInSeconds = Math.floor(lockInMilliseconds / 1000);
-  const lockInHours = Math.floor(lockInSeconds / 3600);
-  const lockInMinutes = Math.floor((lockInSeconds % 3600) / 60);
-  const lockInSecsOnly = lockInSeconds % 60;
+  // Break Time (Social + Break + Rest)
+  const breakMilliseconds = modeTimers.social + modeTimers.break + modeTimers.rest;
+  const breakSeconds = Math.floor(breakMilliseconds / 1000);
+  const breakMillisecondsOnly = Math.floor((breakMilliseconds % 1000) / 10);
+  const breakHours = Math.floor(breakSeconds / 3600);
+  const breakMinutes = Math.floor((breakSeconds % 3600) / 60);
+  const breakSecsOnly = breakSeconds % 60;
 
   const currentModeData = currentMode ? modes.find((m) => m.id === currentMode) : null;
 
@@ -143,21 +167,24 @@ export function SessionTimer() {
           )}
         </div>
 
-        <div className="relative p-8 md:p-12 text-center space-y-8">
-          {/* Timer */}
-          <div className="space-y-4">
+        <div className="relative p-8 md:p-12 text-center space-y-6">
+          {/* Focus Time - Main Big Timer */}
+          <div className="space-y-2">
+            <div className="text-xs font-bold text-primary uppercase tracking-widest mb-3">
+              Focus Time
+            </div>
             <div className="flex items-end justify-center gap-0 md:gap-1">
               <div
-                className="font-mono tabular-nums leading-none"
+                className="font-mono tabular-nums leading-none text-primary"
                 style={{
                   fontSize: "clamp(80px, 20vw, 180px)",
                   fontWeight: "900",
                   letterSpacing: "-0.03em",
                 }}
-                data-testid="text-timer-display"
+                data-testid="text-focus-timer"
               >
-                {String(hours).padStart(2, "0")}:{String(minutes).padStart(2, "0")}:
-                {String(seconds).padStart(2, "0")}
+                {String(focusHours).padStart(2, "0")}:{String(focusMinutes).padStart(2, "0")}:
+                {String(focusSecsOnly).padStart(2, "0")}
               </div>
               <div
                 className="font-mono tabular-nums leading-none"
@@ -169,54 +196,71 @@ export function SessionTimer() {
                   marginBottom: "clamp(8px, 3vw, 20px)",
                 }}
               >
-                .{String(milliseconds).padStart(2, "0")}
+                .{String(focusMillisecondsOnly).padStart(2, "0")}
               </div>
             </div>
-
-            {/* Current Mode Label */}
-            {currentModeData && (
-              <div className="flex flex-col items-center gap-3">
-                <div className="flex items-center gap-3 justify-center">
-                  <currentModeData.icon
-                    className={`h-8 w-8 ${currentModeData.textColor}`}
-                  />
-                  <span
-                    className={`text-3xl md:text-4xl font-bold ${currentModeData.textColor}`}
-                    data-testid="text-current-mode"
-                  >
-                    {currentModeData.label}
-                  </span>
-                </div>
-                {isRunning && (
-                  <div className="text-sm text-muted-foreground animate-pulse">
-                    ● Session Running
-                  </div>
-                )}
-                {!isRunning && currentMode && (
-                  <div className="text-sm text-muted-foreground">Ready to start</div>
-                )}
-              </div>
-            )}
-
-            {!currentMode && (
-              <div className="text-lg text-muted-foreground">Select a mode to begin</div>
-            )}
           </div>
 
-          {/* Lock In Time Highlight */}
-          {currentModeData && (
-            <div className="bg-primary/10 rounded-xl p-6 border border-primary/20">
-              <div className="text-xs font-bold text-primary uppercase tracking-widest mb-2">
-                Lock In Time (Deep Work + Creative)
+          {/* Break Time - Secondary Timer */}
+          <div className="space-y-2 pt-4 border-t border-border/30">
+            <div className="text-xs font-bold text-secondary uppercase tracking-widest mb-3">
+              Break Time
+            </div>
+            <div className="flex items-end justify-center gap-0 md:gap-1">
+              <div
+                className="font-mono tabular-nums leading-none text-secondary"
+                style={{
+                  fontSize: "clamp(48px, 12vw, 100px)",
+                  fontWeight: "800",
+                  letterSpacing: "-0.03em",
+                }}
+                data-testid="text-break-timer"
+              >
+                {String(breakHours).padStart(2, "0")}:{String(breakMinutes).padStart(2, "0")}:
+                {String(breakSecsOnly).padStart(2, "0")}
               </div>
               <div
-                className="font-mono tabular-nums text-4xl md:text-5xl font-bold text-primary"
-                data-testid="text-lock-in-time"
+                className="font-mono tabular-nums leading-none"
+                style={{
+                  fontSize: "clamp(28px, 7vw, 56px)",
+                  fontWeight: "700",
+                  letterSpacing: "-0.02em",
+                  color: "hsl(var(--muted-foreground))",
+                  marginBottom: "clamp(4px, 2vw, 12px)",
+                }}
               >
-                {String(lockInHours).padStart(2, "0")}:{String(lockInMinutes).padStart(2, "0")}:
-                {String(lockInSecsOnly).padStart(2, "0")}
+                .{String(breakMillisecondsOnly).padStart(2, "0")}
               </div>
             </div>
+          </div>
+
+          {/* Current Mode Label */}
+          {currentModeData && (
+            <div className="flex flex-col items-center gap-3 pt-4">
+              <div className="flex items-center gap-3 justify-center">
+                <currentModeData.icon
+                  className={`h-8 w-8 ${currentModeData.textColor}`}
+                />
+                <span
+                  className={`text-3xl md:text-4xl font-bold ${currentModeData.textColor}`}
+                  data-testid="text-current-mode"
+                >
+                  {currentModeData.label}
+                </span>
+              </div>
+              {isRunning && (
+                <div className="text-sm text-muted-foreground animate-pulse">
+                  ● Session Running
+                </div>
+              )}
+              {!isRunning && currentMode && (
+                <div className="text-sm text-muted-foreground">Ready to start</div>
+              )}
+            </div>
+          )}
+
+          {!currentMode && (
+            <div className="text-lg text-muted-foreground pt-4">Select a mode to begin</div>
           )}
         </div>
       </div>
@@ -310,18 +354,41 @@ export function SessionTimer() {
       </div>
 
       {/* Time Breakdown */}
-      {(modeTimers["deep-work"] > 0 ||
-        modeTimers.creative > 0 ||
-        modeTimers.social > 0 ||
-        modeTimers.rest > 0) && (
+      {Object.values(modeTimers).some(time => time > 0) && (
         <Card>
           <CardContent className="pt-6">
             <h3 className="text-xs font-bold text-muted-foreground mb-4 uppercase tracking-widest">
               Session Breakdown
             </h3>
-            <div className="space-y-3">
+            <div className="space-y-4">
+              {/* Focus Time Summary */}
+              {focusSeconds > 0 && (
+                <div className="p-4 rounded-lg bg-primary/10 border border-primary/20">
+                  <div className="text-xs font-bold text-primary uppercase tracking-widest mb-2">
+                    Total Focus Time
+                  </div>
+                  <div className="font-mono text-2xl font-bold text-primary">
+                    {String(focusHours).padStart(2, "0")}:{String(focusMinutes).padStart(2, "0")}:
+                    {String(focusSecsOnly).padStart(2, "0")}
+                  </div>
+                </div>
+              )}
+
+              {/* Break Time Summary */}
+              {breakSeconds > 0 && (
+                <div className="p-4 rounded-lg bg-secondary/10 border border-secondary/20">
+                  <div className="text-xs font-bold text-secondary uppercase tracking-widest mb-2">
+                    Total Break Time
+                  </div>
+                  <div className="font-mono text-2xl font-bold text-secondary">
+                    {String(breakHours).padStart(2, "0")}:{String(breakMinutes).padStart(2, "0")}:
+                    {String(breakSecsOnly).padStart(2, "0")}
+                  </div>
+                </div>
+              )}
+
               {/* Individual Mode Times */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3 pt-2">
                 {modes.map((mode) => {
                   const modeSeconds = Math.floor(modeTimers[mode.id] / 1000);
                   const modeHours = Math.floor(modeSeconds / 3600);
