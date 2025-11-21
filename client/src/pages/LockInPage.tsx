@@ -1,53 +1,56 @@
 import { SessionTimer } from "@/components/SessionTimer";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Zap, Share2 } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Zap } from "lucide-react";
 
 export default function LockInPage() {
   return (
-    <div className="h-full overflow-auto">
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-primary/10 via-background to-accent/10 px-8 py-16 border-b border-border">
-        <div className="max-w-4xl mx-auto text-center space-y-4">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Zap className="h-6 w-6 text-primary" />
-            <h1 className="text-5xl font-serif font-medium">Lock In</h1>
+    <div className="h-full overflow-auto flex flex-col">
+      {/* Header */}
+      <div className="sticky top-0 z-10 bg-gradient-to-b from-background via-background to-transparent border-b border-border px-8 py-6">
+        <div className="max-w-4xl mx-auto flex items-center gap-3">
+          <Zap className="h-7 w-7 text-primary" />
+          <div>
+            <h1 className="text-3xl font-serif font-bold">Locked In</h1>
+            <p className="text-sm text-muted-foreground">Keep this open. Stay focused. No distractions.</p>
           </div>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Choose your focus mode and watch the timer. Switch between modes anytime—Deep Work & Creative time counts toward your Lock In Time. Perfect for streaming or accountability.
-          </p>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-2xl mx-auto p-8 space-y-8">
-        <SessionTimer />
+      {/* Main Timer */}
+      <div className="flex-1 flex items-center justify-center p-8">
+        <div className="w-full max-w-4xl">
+          <SessionTimer />
+        </div>
+      </div>
 
-        {/* Tips Card */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Share2 className="h-5 w-5" />
-              How It Works
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3 text-sm text-muted-foreground">
-            <p>
-              ✦ <strong>Lock In Time</strong> - Your Deep Work + Creative time combined. This is your real productive time.
-            </p>
-            <p>
-              ✦ <strong>Other Timers</strong> - Social & Rest time is tracked separately and doesn't count toward Lock In Time.
-            </p>
-            <p>
-              ✦ <strong>Switch Modes</strong> - Pause and switch between modes anytime. Each mode has its own timer, and the main display shows milliseconds for that motivational boost.
-            </p>
-            <p>
-              ✦ <strong>Share Your Screen</strong> - Keep this open while you work. Perfect for streaming, accountability partners, or just keeping yourself motivated.
-            </p>
-            <p>
-              ✦ <strong>Quick Journaling</strong> - Once you lock in your time, head to the journal to reflect on your session.
-            </p>
-          </CardContent>
-        </Card>
+      {/* Footer */}
+      <div className="border-t border-border px-8 py-6 bg-muted/30">
+        <div className="max-w-4xl mx-auto">
+          <Card className="border-0 bg-transparent shadow-none">
+            <CardContent className="p-0">
+              <div className="grid md:grid-cols-3 gap-6 text-center">
+                <div>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wide font-semibold mb-1">
+                    Your Session
+                  </p>
+                  <p className="text-xl font-mono font-bold">Deep Work Mode</p>
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wide font-semibold mb-1">
+                    Total Time
+                  </p>
+                  <p className="text-xl font-mono font-bold">00:15:32</p>
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wide font-semibold mb-1">
+                    Tip
+                  </p>
+                  <p className="text-sm text-muted-foreground">Switch modes anytime without losing momentum</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

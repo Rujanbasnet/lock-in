@@ -1,11 +1,8 @@
-import { IntentionCard } from "@/components/IntentionCard";
 import { ActivityTimeline } from "@/components/ActivityTimeline";
 import { WeeklyOverview } from "@/components/WeeklyOverview";
-import { BreakReminder } from "@/components/BreakReminder";
-import { QuickStats } from "@/components/QuickStats";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Zap, Target, Clock, BookOpen, BarChart3 } from "lucide-react";
+import { Zap, Target, BookOpen, BarChart3, ArrowRight } from "lucide-react";
 import { useLocation } from "wouter";
 
 export default function Dashboard() {
@@ -51,153 +48,129 @@ export default function Dashboard() {
   return (
     <div className="h-full overflow-auto">
       <div className="max-w-7xl mx-auto p-8 space-y-8">
+        {/* Header */}
         <div>
-          <h1 className="text-4xl font-serif font-medium mb-2">Lock In Today</h1>
-          <p className="text-muted-foreground">
-            Focus hard, work smart, and track your progress. Here's your workflow for maximum productivity.
+          <h1 className="text-5xl font-serif font-bold mb-2">Ready to Lock In?</h1>
+          <p className="text-lg text-muted-foreground">
+            Follow the workflow to maximize your productivity and stay focused on what matters
           </p>
         </div>
 
-        {/* Workflow Guide */}
-        <Card className="border-primary/30 bg-gradient-to-br from-primary/5 to-primary/10">
-          <CardHeader>
-            <CardTitle className="text-lg">Your Lock In Workflow</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="grid md:grid-cols-4 gap-4">
-                {/* Step 1: Intention */}
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-chart-1 text-white text-sm font-bold">
-                      1
-                    </div>
-                    <span className="font-semibold">Set Intention</span>
+        {/* Main Workflow Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* Step 1: Set Intention */}
+          <Card className="border-2 hover:border-primary/50 transition-colors cursor-pointer hover-elevate" 
+                onClick={() => navigate("/intention")}>
+            <CardContent className="p-6">
+              <div className="flex flex-col h-full gap-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-chart-1/20">
+                    <Target className="h-5 w-5 text-chart-1" />
                   </div>
-                  <p className="text-sm text-muted-foreground pl-10">
-                    Define what you're locking in for today. Be specific about your goals.
-                  </p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="mt-2 w-fit ml-10"
-                    data-testid="button-set-intention"
-                    onClick={() => navigate("/intention")}
-                  >
-                    <Target className="h-4 w-4 mr-2" />
-                    Set Now
-                  </Button>
+                  <div className="text-xs font-bold bg-chart-1/20 text-chart-1 px-2 py-1 rounded">STEP 1</div>
                 </div>
-
-                {/* Step 2: Lock In */}
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-chart-2 text-white text-sm font-bold">
-                      2
-                    </div>
-                    <span className="font-semibold">Lock In</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground pl-10">
-                    Start the timer and focus. Switch modes as needed—Deep Work, Creative, Social, or Rest.
-                  </p>
-                  <Button
-                    size="sm"
-                    className="mt-2 w-fit ml-10"
-                    data-testid="button-start-lock-in"
-                    onClick={() => navigate("/lock-in")}
-                  >
-                    <Zap className="h-4 w-4 mr-2" />
-                    Start Now
-                  </Button>
+                <div>
+                  <h3 className="font-semibold text-lg mb-1">Set Intention</h3>
+                  <p className="text-sm text-muted-foreground">Define exactly what you're committing to today</p>
                 </div>
-
-                {/* Step 3: Reflect */}
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-chart-3 text-white text-sm font-bold">
-                      3
-                    </div>
-                    <span className="font-semibold">Reflect</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground pl-10">
-                    After your session, journal about what you accomplished and how aligned you were with your intention.
-                  </p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="mt-2 w-fit ml-10"
-                    data-testid="button-reflect"
-                    onClick={() => navigate("/journal")}
-                  >
-                    <BookOpen className="h-4 w-4 mr-2" />
-                    Journal
-                  </Button>
-                </div>
-
-                {/* Step 4: Review */}
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-chart-4 text-white text-sm font-bold">
-                      4
-                    </div>
-                    <span className="font-semibold">Review</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground pl-10">
-                    Check your activity log to see your Lock In Time throughout the day and track patterns.
-                  </p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="mt-2 w-fit ml-10"
-                    data-testid="button-review-log"
-                    onClick={() => navigate("/activities")}
-                  >
-                    <BarChart3 className="h-4 w-4 mr-2" />
-                    View Log
-                  </Button>
+                <div className="mt-auto">
+                  <ArrowRight className="h-5 w-5 text-muted-foreground" />
                 </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
 
-        {/* Set Intention */}
-        <div>
-          <h2 className="text-2xl font-serif font-medium mb-4">Today's Intention</h2>
-          <IntentionCard />
+          {/* Step 2: Lock In */}
+          <Card className="border-2 border-primary hover:border-primary/70 transition-colors cursor-pointer hover-elevate shadow-lg shadow-primary/10" 
+                onClick={() => navigate("/lock-in")}>
+            <CardContent className="p-6 bg-gradient-to-br from-primary/5 to-transparent">
+              <div className="flex flex-col h-full gap-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/20">
+                    <Zap className="h-5 w-5 text-primary" />
+                  </div>
+                  <div className="text-xs font-bold bg-primary/20 text-primary px-2 py-1 rounded">STEP 2</div>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg mb-1 text-primary">Start Locking In</h3>
+                  <p className="text-sm text-muted-foreground">Timer starts. Focus begins. No distractions.</p>
+                </div>
+                <div className="mt-auto">
+                  <ArrowRight className="h-5 w-5 text-primary" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Step 3: Reflect */}
+          <Card className="border-2 hover:border-primary/50 transition-colors cursor-pointer hover-elevate" 
+                onClick={() => navigate("/journal")}>
+            <CardContent className="p-6">
+              <div className="flex flex-col h-full gap-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-chart-2/20">
+                    <BookOpen className="h-5 w-5 text-chart-2" />
+                  </div>
+                  <div className="text-xs font-bold bg-chart-2/20 text-chart-2 px-2 py-1 rounded">STEP 3</div>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg mb-1">Reflect & Journal</h3>
+                  <p className="text-sm text-muted-foreground">Compare your intention with what you accomplished</p>
+                </div>
+                <div className="mt-auto">
+                  <ArrowRight className="h-5 w-5 text-muted-foreground" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Step 4: Review */}
+          <Card className="border-2 hover:border-primary/50 transition-colors cursor-pointer hover-elevate" 
+                onClick={() => navigate("/activities")}>
+            <CardContent className="p-6">
+              <div className="flex flex-col h-full gap-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-chart-4/20">
+                    <BarChart3 className="h-5 w-5 text-chart-4" />
+                  </div>
+                  <div className="text-xs font-bold bg-chart-4/20 text-chart-4 px-2 py-1 rounded">STEP 4</div>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg mb-1">Review Activity</h3>
+                  <p className="text-sm text-muted-foreground">Track your Lock In Time throughout the day</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Quick Lock In Box */}
-        <Card className="border-primary/50 bg-gradient-to-br from-primary/10 via-background to-accent/10 overflow-hidden">
-          <CardContent className="p-0 flex flex-col md:flex-row gap-8 items-center">
-            <div className="flex-1 p-8">
-              <h2 className="text-3xl font-serif font-medium mb-2">Ready to Lock In?</h2>
-              <p className="text-muted-foreground mb-6">
-                You've set your intention. Now it's time to focus. No distractions, no delays. Just you and your work. The timer is waiting.
-              </p>
-              <Button size="lg" data-testid="button-lock-in-hero" onClick={() => navigate("/lock-in")}>
-                <Zap className="h-5 w-5 mr-2" />
-                Start Lock In Session
-              </Button>
-            </div>
-            <div className="text-right p-8">
-              <div className="text-6xl font-mono font-bold text-primary/20">
-                00:00:00
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        {/* Quick Stats */}
+        <div className="grid md:grid-cols-3 gap-4">
+          <Card>
+            <CardContent className="p-6">
+              <p className="text-sm text-muted-foreground mb-1">Today's Lock In Time</p>
+              <p className="text-3xl font-bold font-mono">04:32:18</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-6">
+              <p className="text-sm text-muted-foreground mb-1">Deep Work + Creative</p>
+              <p className="text-3xl font-bold font-mono">02:45:30</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-6">
+              <p className="text-sm text-muted-foreground mb-1">7 Day Streak</p>
+              <p className="text-3xl font-bold">🔥 7</p>
+            </CardContent>
+          </Card>
+        </div>
 
-        {/* Activity & Stats */}
+        {/* Activity & Weekly */}
         <div className="grid lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
             <ActivityTimeline activities={mockActivities} />
             <WeeklyOverview data={mockWeeklyData} />
-          </div>
-
-          <div className="space-y-6">
-            <BreakReminder />
-            <QuickStats />
           </div>
         </div>
       </div>

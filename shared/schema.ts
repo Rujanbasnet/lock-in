@@ -13,6 +13,7 @@ export const intentions = pgTable("intentions", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   date: text("date").notNull(),
   type: text("type").notNull(),
+  content: text("content"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -29,6 +30,7 @@ export const activities = pgTable("activities", {
 export const journalEntries = pgTable("journal_entries", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   date: text("date").notNull(),
+  intentionId: varchar("intention_id"),
   content: text("content").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
