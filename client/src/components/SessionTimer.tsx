@@ -368,16 +368,16 @@ export function SessionTimer() {
         </Button>
       </div>
 
-      {/* Finish Session Button */}
+      {/* End Session Button */}
       <Button
         onClick={handleFinishSession}
-        variant="default"
-        size="lg"
-        className="w-full min-h-12 text-base font-bold"
+        variant="outline"
+        size="sm"
+        className="font-bold"
         data-testid="button-finish-session"
       >
-        <CheckCircle className="h-5 w-5 mr-2" />
-        Finish Session & Reflect
+        <CheckCircle className="h-4 w-4 mr-1" />
+        End session
       </Button>
 
       {/* Time Breakdown */}
