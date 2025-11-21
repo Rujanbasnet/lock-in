@@ -25,8 +25,8 @@ export default function Login() {
       <div className="absolute top-20 right-1/4 w-72 h-72 bg-primary/10 rounded-full blur-3xl opacity-30" />
       <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl opacity-20" />
 
-      <div className="flex-1 flex flex-col items-center justify-center px-4 relative z-10">
-        <div className="w-full max-w-md space-y-8">
+      <div className="flex-1 flex flex-col items-center justify-center px-4 relative z-10 w-full">
+        <div className="w-full max-w-md space-y-8 mx-auto">
           {/* Logo Section */}
           <div className="text-center space-y-4">
             <div className="inline-block p-3 rounded-lg bg-primary/10 border border-primary/20">
@@ -102,7 +102,7 @@ export default function Login() {
           </div>
 
           {/* Features Highlight */}
-          <div className="grid grid-cols-3 gap-4 pt-4">
+          <div className="grid grid-cols-3 gap-4 pt-4 w-full">
             <div className="text-center space-y-2 p-3 rounded-lg bg-primary/5 border border-primary/20">
               <Zap className="h-5 w-5 text-primary mx-auto" />
               <p className="text-xs font-mono font-bold uppercase text-muted-foreground">Real-Time</p>
@@ -120,7 +120,7 @@ export default function Login() {
       </div>
 
       {/* Footer */}
-      <div className="border-t border-border/30 px-6 py-6 bg-card/30 backdrop-blur-sm relative z-10">
+      <div className="border-t border-border/30 px-6 py-6 bg-card/30 backdrop-blur-sm relative z-10 w-full">
         <p className="text-xs text-muted-foreground text-center font-mono">
           Built for makers, builders, and shippers who refuse to waste time
         </p>
