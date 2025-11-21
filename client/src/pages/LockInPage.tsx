@@ -4,11 +4,9 @@ import { Lock, Zap } from "lucide-react";
 
 export default function LockInPage() {
   return (
-    <div className="h-full overflow-auto relative flex flex-col">
+    <div className="h-full overflow-auto relative">
       {/* Animated Progress Beams - Top and Bottom */}
       <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent 
-                    animate-pulse opacity-60 z-20" />
-      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-secondary to-transparent 
                     animate-pulse opacity-60 z-20" />
       
       {/* Animated Progress Beams - Left and Right */}
@@ -32,63 +30,68 @@ export default function LockInPage() {
         </Badge>
       </div>
 
-      {/* Main Content - Centered */}
-      <div className="flex-1 flex flex-col items-center justify-center px-4 py-6 md:py-8 bg-gradient-to-br from-background via-card/20 to-background">
-        {/* Motivational Mantra */}
-        <div className="mb-4 md:mb-6 text-center max-w-2xl">
-          <p className="text-xs md:text-sm font-mono text-muted-foreground uppercase tracking-widest mb-1.5">
+      {/* Main Content - Centered with proper spacing */}
+      <div className="min-h-full flex flex-col px-4 py-4 md:py-6 bg-gradient-to-br from-background via-card/20 to-background">
+        {/* Motivational Mantra - Compact */}
+        <div className="text-center max-w-2xl mx-auto mb-3 md:mb-4">
+          <p className="text-[10px] md:text-xs font-mono text-muted-foreground uppercase tracking-widest mb-1">
             Current Mission
           </p>
-          <h1 className="text-lg md:text-2xl lg:text-3xl font-black tracking-tight leading-tight" data-testid="text-current-intention">
+          <h1 className="text-base md:text-xl lg:text-2xl font-black tracking-tight leading-tight" data-testid="text-current-intention">
             Build the feature. Ship it today.
           </h1>
         </div>
 
-        {/* Timer Component */}
-        <div className="w-full max-w-5xl">
-          <SessionTimer />
-        </div>
-
-        {/* Intensity Meter */}
-        <div className="mt-6 md:mt-8 w-full max-w-md">
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-[10px] md:text-xs font-mono text-muted-foreground uppercase tracking-wider">
-              <span>Intensity</span>
-              <span data-testid="text-intensity-percentage">87%</span>
-            </div>
-            <div className="h-1.5 bg-border rounded-full overflow-hidden" role="progressbar" aria-valuenow={87} aria-valuemin={0} aria-valuemax={100} aria-label="Focus intensity">
-              <div className="h-full bg-gradient-to-r from-primary via-secondary to-destructive w-[87%] 
-                           rounded-full animate-pulse" />
-            </div>
-            <div className="flex items-center justify-between text-[9px] md:text-[10px] font-mono text-muted-foreground/60 uppercase">
-              <span>Locked In</span>
-              <span>Relentless</span>
-            </div>
+        {/* Timer Component - Centered */}
+        <div className="flex-1 flex items-center justify-center">
+          <div className="w-full max-w-5xl">
+            <SessionTimer />
           </div>
         </div>
 
-        {/* Contextual Mantra */}
-        <div className="mt-4 md:mt-6 text-center">
-          <p className="text-xs md:text-sm font-mono text-primary uppercase tracking-wide" data-testid="text-mantra">
-            "Stay ruthless for 47 more minutes"
-          </p>
-        </div>
-      </div>
+        {/* Bottom Section - Sticky */}
+        <div className="mt-4 space-y-3 md:space-y-4">
+          {/* Intensity Meter */}
+          <div className="w-full max-w-md mx-auto">
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between text-[10px] md:text-xs font-mono text-muted-foreground uppercase tracking-wider">
+                <span>Intensity</span>
+                <span data-testid="text-intensity-percentage">87%</span>
+              </div>
+              <div className="h-1.5 bg-border rounded-full overflow-hidden" role="progressbar" aria-valuenow={87} aria-valuemin={0} aria-valuemax={100} aria-label="Focus intensity">
+                <div className="h-full bg-gradient-to-r from-primary via-secondary to-destructive w-[87%] 
+                             rounded-full animate-pulse" />
+              </div>
+              <div className="flex items-center justify-between text-[9px] md:text-[10px] font-mono text-muted-foreground/60 uppercase">
+                <span>Locked In</span>
+                <span>Relentless</span>
+              </div>
+            </div>
+          </div>
 
-      {/* Compact Stats Footer */}
-      <div className="border-t border-border/50 bg-card/60 backdrop-blur-sm px-4 py-2.5">
-        <div className="max-w-7xl mx-auto flex justify-around items-center text-center gap-4">
-          <div className="flex-1">
-            <p className="text-[9px] md:text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-0.5">Session</p>
-            <p className="text-xs md:text-sm font-mono font-bold" data-testid="text-session-time">00:47:32</p>
+          {/* Contextual Mantra */}
+          <div className="text-center">
+            <p className="text-xs md:text-sm font-mono text-primary uppercase tracking-wide" data-testid="text-mantra">
+              "Stay ruthless for 47 more minutes"
+            </p>
           </div>
-          <div className="flex-1">
-            <p className="text-[9px] md:text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-0.5">Today</p>
-            <p className="text-xs md:text-sm font-mono font-bold" data-testid="text-today-time">04:32:18</p>
-          </div>
-          <div className="flex-1">
-            <p className="text-[9px] md:text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-0.5">Streak</p>
-            <p className="text-xs md:text-sm font-mono font-bold text-destructive" data-testid="text-streak-days">7 Days</p>
+          
+          {/* Compact Stats Footer */}
+          <div className="border-t border-border/50 bg-card/60 backdrop-blur-sm px-4 py-2 rounded-lg">
+            <div className="max-w-7xl mx-auto flex justify-around items-center text-center gap-4">
+              <div className="flex-1">
+                <p className="text-[9px] md:text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-0.5">Session</p>
+                <p className="text-xs md:text-sm font-mono font-bold" data-testid="text-session-time">00:47:32</p>
+              </div>
+              <div className="flex-1">
+                <p className="text-[9px] md:text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-0.5">Today</p>
+                <p className="text-xs md:text-sm font-mono font-bold" data-testid="text-today-time">04:32:18</p>
+              </div>
+              <div className="flex-1">
+                <p className="text-[9px] md:text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-0.5">Streak</p>
+                <p className="text-xs md:text-sm font-mono font-bold text-destructive" data-testid="text-streak-days">7 Days</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

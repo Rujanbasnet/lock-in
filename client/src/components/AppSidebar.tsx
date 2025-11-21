@@ -51,6 +51,7 @@ const menuItems = [
 
 export function AppSidebar() {
   const [location] = useLocation();
+  const isLockInActive = location === "/lock-in";
 
   return (
     <Sidebar>
@@ -78,7 +79,7 @@ export function AppSidebar() {
                         <item.icon className="h-4 w-4" />
                         <span className="font-medium">{item.title}</span>
                       </div>
-                      {item.badge && (
+                      {item.badge && isLockInActive && (
                         <Badge variant="outline" className="text-[10px] font-mono border-primary/50 text-primary uppercase">
                           {item.badge}
                         </Badge>
