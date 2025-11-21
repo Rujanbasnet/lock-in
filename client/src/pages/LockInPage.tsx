@@ -1,7 +1,6 @@
 import { SessionTimer } from "@/components/SessionTimer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Zap, Share2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export default function LockInPage() {
   return (
@@ -14,8 +13,7 @@ export default function LockInPage() {
             <h1 className="text-5xl font-serif font-medium">Lock In</h1>
           </div>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Choose your focus mode and watch the timer. Switch between modes anytime
-            while maintaining your momentum. Perfect for streaming or accountability.
+            Choose your focus mode and watch the timer. Switch between modes anytime—Deep Work & Creative time counts toward your Lock In Time. Perfect for streaming or accountability.
           </p>
         </div>
       </div>
@@ -29,25 +27,24 @@ export default function LockInPage() {
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <Share2 className="h-5 w-5" />
-              Pro Tips
+              How It Works
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3 text-sm text-muted-foreground">
             <p>
-              ✦ <strong>Share Your Screen</strong> - Show this timer on stream or in video
-              calls to stay accountable and motivate others.
+              ✦ <strong>Lock In Time</strong> - Your Deep Work + Creative time combined. This is your real productive time.
             </p>
             <p>
-              ✦ <strong>Switch Modes</strong> - Pause the timer, change modes, and resume.
-              Your session history tracks every mode switch.
+              ✦ <strong>Other Timers</strong> - Social & Rest time is tracked separately and doesn't count toward Lock In Time.
             </p>
             <p>
-              ✦ <strong>Full Focus</strong> - No distractions. Just you, your work, and
-              the timer. That's it.
+              ✦ <strong>Switch Modes</strong> - Pause and switch between modes anytime. Each mode has its own timer, and the main display shows milliseconds for that motivational boost.
             </p>
             <p>
-              ✦ <strong>Track Patterns</strong> - See which mode you spend the most time
-              in and optimize your workflow.
+              ✦ <strong>Share Your Screen</strong> - Keep this open while you work. Perfect for streaming, accountability partners, or just keeping yourself motivated.
+            </p>
+            <p>
+              ✦ <strong>Quick Journaling</strong> - Once you lock in your time, head to the journal to reflect on your session.
             </p>
           </CardContent>
         </Card>
