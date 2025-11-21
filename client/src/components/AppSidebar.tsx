@@ -9,6 +9,7 @@ import {
   SidebarMenuItem,
   SidebarFooter,
   SidebarHeader,
+  SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
 import { LayoutDashboard, Target, Activity, BookOpen, Settings, Zap, ChevronLeft, ChevronRight } from "lucide-react";
@@ -96,7 +97,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="p-4 border-t border-sidebar-border space-y-3">
+      <SidebarFooter className="p-3 border-t border-sidebar-border space-y-3">
         <div className="flex items-center gap-3 rounded-md border border-sidebar-border p-3 bg-sidebar-accent/30">
           <div className="h-10 w-10 rounded-md bg-primary/20 flex items-center justify-center border border-primary/30">
             <span className="text-sm font-mono font-bold text-primary">JD</span>
@@ -108,16 +109,11 @@ export function AppSidebar() {
             </div>
           </div>
         </div>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="w-full justify-center"
-          onClick={toggleSidebar}
-          data-testid="button-sidebar-minimize"
-        >
-          {isCollapsed ? <ChevronRight className="h-4 w-4 mr-2" /> : <ChevronLeft className="h-4 w-4 mr-2" />}
-          {!isCollapsed && (isCollapsed ? "Expand" : "Minimize")}
-        </Button>
+        <SidebarTrigger asChild data-testid="button-sidebar-toggle">
+          <button className="w-full flex items-center justify-center h-8 rounded-md hover:bg-sidebar-accent/50 transition-colors font-mono text-sm font-bold text-muted-foreground">
+            {isCollapsed ? ">>" : "<<"}
+          </button>
+        </SidebarTrigger>
       </SidebarFooter>
     </Sidebar>
   );
