@@ -2,7 +2,8 @@ import { ActivityTimeline } from "@/components/ActivityTimeline";
 import { WeeklyOverview } from "@/components/WeeklyOverview";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Zap, Target, BookOpen, BarChart3, ArrowRight } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Zap, Target, BookOpen, BarChart3, ArrowRight, Timer, TrendingUp, Flame } from "lucide-react";
 import { useLocation } from "wouter";
 
 export default function Dashboard() {
@@ -47,123 +48,219 @@ export default function Dashboard() {
 
   return (
     <div className="h-full overflow-auto">
-      <div className="max-w-7xl mx-auto p-8 space-y-8">
-        {/* Header */}
-        <div>
-          <h1 className="text-5xl font-serif font-bold mb-2">Ready to Lock In?</h1>
-          <p className="text-lg text-muted-foreground">
-            Follow the workflow to maximize your productivity and stay focused on what matters
-          </p>
+      <div className="max-w-7xl mx-auto p-6 lg:p-8 space-y-6">
+        {/* Header with Mission Control Feel */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <h1 className="text-4xl lg:text-5xl font-black tracking-tighter uppercase">
+                  Mission Control
+                </h1>
+                <Badge variant="outline" className="border-primary/50 text-primary font-mono text-xs">
+                  ACTIVE
+                </Badge>
+              </div>
+              <p className="text-muted-foreground font-medium">
+                Execute the protocol. Lock in and ship.
+              </p>
+            </div>
+            <Button 
+              size="lg"
+              onClick={() => navigate("/lock-in")}
+              data-testid="button-quick-lock-in"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/30 font-bold uppercase tracking-wide"
+            >
+              <Zap className="h-5 w-5 mr-2" />
+              Quick Lock In
+            </Button>
+          </div>
         </div>
 
-        {/* Main Workflow Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {/* Step 1: Set Intention */}
-          <Card className="border-2 hover:border-primary/50 transition-colors cursor-pointer hover-elevate" 
-                onClick={() => navigate("/intention")}>
+        {/* Performance Metrics - Mission Control Style */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Card className="border-border/50 bg-gradient-to-br from-card to-card/50 hover:border-primary/50 transition-all">
             <CardContent className="p-6">
-              <div className="flex flex-col h-full gap-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-chart-1/20">
-                    <Target className="h-5 w-5 text-chart-1" />
-                  </div>
-                  <div className="text-xs font-bold bg-chart-1/20 text-chart-1 px-2 py-1 rounded">STEP 1</div>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg mb-1">Set Intention</h3>
-                  <p className="text-sm text-muted-foreground">Define exactly what you're committing to today</p>
-                </div>
-                <div className="mt-auto">
-                  <ArrowRight className="h-5 w-5 text-muted-foreground" />
-                </div>
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-xs font-mono font-bold text-muted-foreground uppercase tracking-wider">
+                  Lock In Time
+                </p>
+                <Timer className="h-4 w-4 text-primary" />
               </div>
+              <p className="text-4xl font-mono font-black text-foreground mb-1">04:32:18</p>
+              <p className="text-xs text-muted-foreground font-mono">Today's total execution time</p>
             </CardContent>
           </Card>
 
-          {/* Step 2: Lock In */}
-          <Card className="border-2 border-primary hover:border-primary/70 transition-colors cursor-pointer hover-elevate shadow-lg shadow-primary/10" 
-                onClick={() => navigate("/lock-in")}>
-            <CardContent className="p-6 bg-gradient-to-br from-primary/5 to-transparent">
-              <div className="flex flex-col h-full gap-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/20">
-                    <Zap className="h-5 w-5 text-primary" />
-                  </div>
-                  <div className="text-xs font-bold bg-primary/20 text-primary px-2 py-1 rounded">STEP 2</div>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg mb-1 text-primary">Start Locking In</h3>
-                  <p className="text-sm text-muted-foreground">Timer starts. Focus begins. No distractions.</p>
-                </div>
-                <div className="mt-auto">
-                  <ArrowRight className="h-5 w-5 text-primary" />
-                </div>
+          <Card className="border-border/50 bg-gradient-to-br from-card to-card/50 hover:border-secondary/50 transition-all">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-xs font-mono font-bold text-muted-foreground uppercase tracking-wider">
+                  Deep + Creative
+                </p>
+                <Target className="h-4 w-4 text-secondary" />
               </div>
+              <p className="text-4xl font-mono font-black text-foreground mb-1">02:45:30</p>
+              <p className="text-xs text-muted-foreground font-mono">High-intensity work modes</p>
             </CardContent>
           </Card>
 
-          {/* Step 3: Reflect */}
-          <Card className="border-2 hover:border-primary/50 transition-colors cursor-pointer hover-elevate" 
-                onClick={() => navigate("/journal")}>
+          <Card className="border-border/50 bg-gradient-to-br from-card to-card/50 hover:border-destructive/50 transition-all">
             <CardContent className="p-6">
-              <div className="flex flex-col h-full gap-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-chart-2/20">
-                    <BookOpen className="h-5 w-5 text-chart-2" />
-                  </div>
-                  <div className="text-xs font-bold bg-chart-2/20 text-chart-2 px-2 py-1 rounded">STEP 3</div>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg mb-1">Reflect & Journal</h3>
-                  <p className="text-sm text-muted-foreground">Compare your intention with what you accomplished</p>
-                </div>
-                <div className="mt-auto">
-                  <ArrowRight className="h-5 w-5 text-muted-foreground" />
-                </div>
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-xs font-mono font-bold text-muted-foreground uppercase tracking-wider">
+                  Streak
+                </p>
+                <Flame className="h-4 w-4 text-destructive" />
               </div>
-            </CardContent>
-          </Card>
-
-          {/* Step 4: Review */}
-          <Card className="border-2 hover:border-primary/50 transition-colors cursor-pointer hover-elevate" 
-                onClick={() => navigate("/activities")}>
-            <CardContent className="p-6">
-              <div className="flex flex-col h-full gap-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-chart-4/20">
-                    <BarChart3 className="h-5 w-5 text-chart-4" />
-                  </div>
-                  <div className="text-xs font-bold bg-chart-4/20 text-chart-4 px-2 py-1 rounded">STEP 4</div>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg mb-1">Review Activity</h3>
-                  <p className="text-sm text-muted-foreground">Track your Lock In Time throughout the day</p>
-                </div>
-              </div>
+              <p className="text-4xl font-mono font-black text-foreground mb-1">7 Days</p>
+              <p className="text-xs text-muted-foreground font-mono">Consecutive lock-ins</p>
             </CardContent>
           </Card>
         </div>
 
-        {/* Quick Stats */}
-        <div className="grid md:grid-cols-3 gap-4">
-          <Card>
-            <CardContent className="p-6">
-              <p className="text-sm text-muted-foreground mb-1">Today's Lock In Time</p>
-              <p className="text-3xl font-bold font-mono">04:32:18</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-6">
-              <p className="text-sm text-muted-foreground mb-1">Deep Work + Creative</p>
-              <p className="text-3xl font-bold font-mono">02:45:30</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-6">
-              <p className="text-sm text-muted-foreground mb-1">7 Day Streak</p>
-              <p className="text-3xl font-bold">🔥 7</p>
-            </CardContent>
-          </Card>
+        {/* Main Workflow Quadrants */}
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-bold uppercase tracking-tight">Execution Protocol</h2>
+            <div className="text-xs font-mono text-muted-foreground">4 STAGES</div>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
+            {/* Stage 1: Intention */}
+            <Card 
+              className="border-chart-1/30 bg-gradient-to-br from-chart-1/5 to-transparent hover:border-chart-1/60 
+                       transition-all cursor-pointer group hover-elevate relative overflow-hidden" 
+              onClick={() => navigate("/intention")}
+              data-testid="card-set-intention"
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-chart-1/5 rounded-full -translate-y-16 translate-x-16 
+                            group-hover:scale-150 transition-transform duration-500" />
+              <CardContent className="p-5 relative z-10">
+                <div className="flex flex-col h-full gap-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-md bg-chart-1/20 border border-chart-1/30">
+                      <Target className="h-5 w-5 text-chart-1" />
+                    </div>
+                    <div className="text-[10px] font-mono font-black text-chart-1 px-2 py-1 bg-chart-1/20 rounded uppercase tracking-widest">
+                      01
+                    </div>
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="font-black text-base uppercase tracking-tight">Set Intention</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      Define your target. No vague goals.
+                    </p>
+                  </div>
+                  <div className="mt-auto flex items-center text-chart-1 text-xs font-mono font-bold">
+                    <span className="mr-2">INITIATE</span>
+                    <ArrowRight className="h-3 w-3" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Stage 2: Lock In (Primary) */}
+            <Card 
+              className="border-primary/50 bg-gradient-to-br from-primary/10 to-transparent hover:border-primary 
+                       transition-all cursor-pointer group shadow-lg shadow-primary/20 hover:shadow-primary/40 
+                       hover-elevate relative overflow-hidden" 
+              onClick={() => navigate("/lock-in")}
+              data-testid="card-lock-in"
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -translate-y-16 translate-x-16 
+                            group-hover:scale-150 transition-transform duration-500" />
+              <CardContent className="p-5 relative z-10">
+                <div className="flex flex-col h-full gap-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-md bg-primary/20 border border-primary/40 
+                                  animate-pulse-glow">
+                      <Zap className="h-5 w-5 text-primary" />
+                    </div>
+                    <div className="text-[10px] font-mono font-black text-primary px-2 py-1 bg-primary/20 rounded uppercase tracking-widest">
+                      02
+                    </div>
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="font-black text-base uppercase tracking-tight text-primary">Lock In Now</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      Start timer. Enter deep work.
+                    </p>
+                  </div>
+                  <div className="mt-auto flex items-center text-primary text-xs font-mono font-bold">
+                    <span className="mr-2">EXECUTE</span>
+                    <ArrowRight className="h-3 w-3" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Stage 3: Reflect */}
+            <Card 
+              className="border-secondary/30 bg-gradient-to-br from-secondary/5 to-transparent hover:border-secondary/60 
+                       transition-all cursor-pointer group hover-elevate relative overflow-hidden" 
+              onClick={() => navigate("/journal")}
+              data-testid="card-reflect"
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-full -translate-y-16 translate-x-16 
+                            group-hover:scale-150 transition-transform duration-500" />
+              <CardContent className="p-5 relative z-10">
+                <div className="flex flex-col h-full gap-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-md bg-secondary/20 border border-secondary/30">
+                      <BookOpen className="h-5 w-5 text-secondary" />
+                    </div>
+                    <div className="text-[10px] font-mono font-black text-secondary px-2 py-1 bg-secondary/20 rounded uppercase tracking-widest">
+                      03
+                    </div>
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="font-black text-base uppercase tracking-tight">Debrief</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      Assess output vs. intention.
+                    </p>
+                  </div>
+                  <div className="mt-auto flex items-center text-secondary text-xs font-mono font-bold">
+                    <span className="mr-2">REFLECT</span>
+                    <ArrowRight className="h-3 w-3" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Stage 4: Review */}
+            <Card 
+              className="border-chart-4/30 bg-gradient-to-br from-chart-4/5 to-transparent hover:border-chart-4/60 
+                       transition-all cursor-pointer group hover-elevate relative overflow-hidden" 
+              onClick={() => navigate("/activities")}
+              data-testid="card-review"
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-chart-4/5 rounded-full -translate-y-16 translate-x-16 
+                            group-hover:scale-150 transition-transform duration-500" />
+              <CardContent className="p-5 relative z-10">
+                <div className="flex flex-col h-full gap-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-md bg-chart-4/20 border border-chart-4/30">
+                      <BarChart3 className="h-5 w-5 text-chart-4" />
+                    </div>
+                    <div className="text-[10px] font-mono font-black text-chart-4 px-2 py-1 bg-chart-4/20 rounded uppercase tracking-widest">
+                      04
+                    </div>
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="font-black text-base uppercase tracking-tight">Analyze</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      Track metrics. Optimize flow.
+                    </p>
+                  </div>
+                  <div className="mt-auto flex items-center text-chart-4 text-xs font-mono font-bold">
+                    <span className="mr-2">MEASURE</span>
+                    <ArrowRight className="h-3 w-3" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
         {/* Activity & Weekly */}

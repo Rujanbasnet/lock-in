@@ -8,10 +8,12 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarFooter,
+  SidebarHeader,
 } from "@/components/ui/sidebar";
 import { LayoutDashboard, Target, Activity, BookOpen, Settings, Zap } from "lucide-react";
 import { useLocation } from "wouter";
 import { Badge } from "@/components/ui/badge";
+import { LockInLogo } from "@/components/LockInLogo";
 
 const menuItems = [
   {
@@ -23,7 +25,7 @@ const menuItems = [
     title: "Lock In",
     url: "/lock-in",
     icon: Zap,
-    badge: "New",
+    badge: "Active",
   },
   {
     title: "Intention",
@@ -52,10 +54,15 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
+      <SidebarHeader className="p-4 border-b border-sidebar-border">
+        <div className="flex items-center gap-2">
+          <LockInLogo variant="compact" className="text-lg" />
+        </div>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-base font-serif px-4 py-4 text-primary font-bold">
-            LOCK IN
+          <SidebarGroupLabel className="text-xs font-mono px-4 py-2 text-muted-foreground uppercase tracking-widest">
+            Navigation
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -68,11 +75,11 @@ export function AppSidebar() {
                   >
                     <a href={item.url} className="flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
-                        <item.icon />
-                        <span>{item.title}</span>
+                        <item.icon className="h-4 w-4" />
+                        <span className="font-medium">{item.title}</span>
                       </div>
                       {item.badge && (
-                        <Badge variant="secondary" className="text-xs">
+                        <Badge variant="outline" className="text-[10px] font-mono border-primary/50 text-primary uppercase">
                           {item.badge}
                         </Badge>
                       )}
@@ -84,14 +91,16 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="p-4">
-        <div className="flex items-center gap-3 rounded-lg border border-border p-3">
-          <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-            <span className="text-sm font-medium text-primary">JD</span>
+      <SidebarFooter className="p-4 border-t border-sidebar-border">
+        <div className="flex items-center gap-3 rounded-md border border-sidebar-border p-3 bg-sidebar-accent/30">
+          <div className="h-10 w-10 rounded-md bg-primary/20 flex items-center justify-center border border-primary/30">
+            <span className="text-sm font-mono font-bold text-primary">JD</span>
           </div>
           <div className="flex-1 min-w-0">
-            <div className="font-medium text-sm truncate">John Doe</div>
-            <div className="text-xs text-muted-foreground">7 day streak 🔥</div>
+            <div className="font-bold text-sm truncate">John Doe</div>
+            <div className="text-xs text-muted-foreground font-mono">
+              <span className="text-destructive font-bold">7</span> day streak
+            </div>
           </div>
         </div>
       </SidebarFooter>
