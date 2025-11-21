@@ -41,9 +41,9 @@ export default function ActivitiesPage() {
     <div className="h-full overflow-auto">
       <div className="max-w-7xl mx-auto p-8 space-y-8">
         <div>
-          <h1 className="text-4xl font-serif font-medium mb-2">Activity Log</h1>
+          <h1 className="text-4xl font-serif font-medium mb-2">Your Lock In Activity</h1>
           <p className="text-muted-foreground">
-            Track and review your digital activities
+            See exactly how you locked in today. Track your Deep Work, Creative, Social, and Rest sessions throughout the day.
           </p>
         </div>
 

@@ -13,9 +13,9 @@ export default function IntentionPage() {
           />
         </div>
         <div className="relative text-center space-y-2 px-4">
-          <h1 className="text-5xl font-serif font-medium">Set Your Intention</h1>
+          <h1 className="text-5xl font-serif font-medium">Lock In Your Intention</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Each day is a fresh start. Choose how you want to engage with technology today.
+            Before you lock in, define exactly what you're committing to today. Be clear, be focused, be ready to deliver.
           </p>
         </div>
       </div>

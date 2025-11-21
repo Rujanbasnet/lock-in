@@ -40,9 +40,9 @@ export function IntentionCard() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-serif text-3xl">Today's Intention</CardTitle>
+        <CardTitle className="font-serif text-3xl">What Are You Locking In For?</CardTitle>
         <CardDescription>
-          How do you want to approach your digital time today?
+          Define your focus mode. Are you ready for Deep Work, Creative exploration, Social connection, or Rest & recovery?
         </CardDescription>
       </CardHeader>
       <CardContent>

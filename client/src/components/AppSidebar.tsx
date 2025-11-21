@@ -54,8 +54,8 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-base font-serif px-4 py-4">
-            Digital Wellness
+          <SidebarGroupLabel className="text-base font-serif px-4 py-4 text-primary font-bold">
+            LOCK IN
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
