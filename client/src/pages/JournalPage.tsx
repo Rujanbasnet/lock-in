@@ -2,8 +2,9 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/PageHeader";
-import { Calendar, Target, BookOpen, X } from "lucide-react";
-import { useState } from "react";
+import { Calendar, Target, BookOpen, X, Loader2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import workspaceImg from "@assets/generated_images/abstract_tech_workspace_background.png";
 
 const reflectionPrompts = [
@@ -17,11 +18,18 @@ export default function JournalPage() {
   const [reflection, setReflection] = useState("");
   const [isSaved, setIsSaved] = useState(false);
   
-  // Mock intention from earlier (in real app, would come from state management)
-  const todayIntention = {
-    type: "deep-work",
-    content: "Get the user authentication feature into production",
-  };
+  // Fetch today's intention from the database
+  const todayDate = new Date().toISOString().split('T')[0];
+  const { data: todayIntention, isLoading } = useQuery({
+    queryKey: ['/api/intention', todayDate],
+    queryFn: async () => {
+      const response = await fetch(`/api/intention/${todayDate}`);
+      if (!response.ok) {
+        return null;
+      }
+      return response.json();
+    },
+  });
 
   const handleSaveReflection = () => {
     console.log("Reflection saved:", reflection);
@@ -38,7 +46,9 @@ export default function JournalPage() {
   const intentionTypeLabels: Record<string, string> = {
     "deep-work": "Deep Work",
     creative: "Creative",
+    flow: "Flow",
     social: "Social",
+    break: "Break",
     rest: "Rest",
   };
 
@@ -65,20 +75,31 @@ export default function JournalPage() {
             <CardDescription className="text-xs">What you committed to at the start of your session</CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div>
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
-                Focus Mode
-              </p>
-              <p className="text-sm font-semibold">
-                {intentionTypeLabels[todayIntention.type] || todayIntention.type}
-              </p>
-            </div>
-            <div>
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
-                Intention
-              </p>
-              <p className="text-sm leading-relaxed">"{todayIntention.content}"</p>
-            </div>
+            {isLoading ? (
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Loader2 className="h-4 w-4 animate-spin" />
+                <p className="text-sm">Loading intention...</p>
+              </div>
+            ) : todayIntention ? (
+              <>
+                <div>
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
+                    Focus Mode
+                  </p>
+                  <p className="text-sm font-semibold">
+                    {intentionTypeLabels[todayIntention.type] || todayIntention.type}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
+                    Intention
+                  </p>
+                  <p className="text-sm leading-relaxed">"{todayIntention.content}"</p>
+                </div>
+              </>
+            ) : (
+              <p className="text-sm text-muted-foreground italic">No intention set yet. Set one on the Intention page to get started.</p>
+            )}
           </CardContent>
         </Card>
 
@@ -102,7 +123,7 @@ export default function JournalPage() {
             {/* Quick Prompts */}
             <div className="space-y-2">
               <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wide">Click to add prompts:</p>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-1">
                 {reflectionPrompts.map((prompt) => (
                   <button
                     key={prompt}

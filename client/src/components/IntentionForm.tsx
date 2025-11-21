@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Brain, Palette, Users, Moon } from "lucide-react";
+import { Brain, Palette, Zap, Users, Moon, Coffee } from "lucide-react";
 import { useState } from "react";
 
 const intentionModes = [
@@ -20,6 +20,13 @@ const intentionModes = [
     color: "text-chart-2",
   },
   {
+    id: "flow",
+    label: "Flow",
+    icon: Zap,
+    description: "Immersed, effortless momentum",
+    color: "text-primary",
+  },
+  {
     id: "social",
     label: "Social",
     icon: Users,
@@ -27,11 +34,18 @@ const intentionModes = [
     color: "text-chart-3",
   },
   {
+    id: "break",
+    label: "Break",
+    icon: Coffee,
+    description: "Structured downtime",
+    color: "text-chart-4",
+  },
+  {
     id: "rest",
     label: "Rest",
     icon: Moon,
-    description: "Mindful downtime",
-    color: "text-chart-4",
+    description: "Recovery and reflection",
+    color: "text-chart-5",
   },
 ];
 
@@ -62,7 +76,7 @@ export function IntentionForm({ onSave }: IntentionFormProps) {
           <label className="text-sm font-semibold text-muted-foreground mb-3 block uppercase tracking-wide">
             Your Focus Mode
           </label>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {intentionModes.map((mode) => {
               const Icon = mode.icon;
               const isSelected = selectedType === mode.id;

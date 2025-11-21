@@ -24,6 +24,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get intention by date
+  app.get('/api/intention/:date', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const date = req.params.date;
+      const intention = await storage.getIntentionByDate(userId, date);
+      if (!intention) {
+        return res.status(404).json({ message: "No intention found for this date" });
+      }
+      res.json(intention);
+    } catch (error) {
+      console.error("Error fetching intention:", error);
+      res.status(500).json({ message: "Failed to fetch intention" });
+    }
+  });
+
   // Get or create subscription
   app.post('/api/get-or-create-subscription', isAuthenticated, async (req: any, res) => {
     try {
