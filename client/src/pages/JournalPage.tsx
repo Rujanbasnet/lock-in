@@ -39,7 +39,7 @@ export default function JournalPage() {
   };
 
   const handlePromptClick = (prompt: string) => {
-    const promptLine = `\n\n► ${prompt}\n`;
+    const promptLine = reflection ? `\n► ${prompt}\n` : `► ${prompt}\n`;
     setReflection(reflection + promptLine);
   };
 
