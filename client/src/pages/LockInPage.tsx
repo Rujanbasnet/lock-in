@@ -5,7 +5,7 @@ import workspaceImg from "@assets/generated_images/abstract_tech_workspace_backg
 
 export default function LockInPage() {
   return (
-    <div className="h-full overflow-auto relative">
+    <div className="h-full w-full overflow-auto relative flex flex-col">
       {/* Subtle background workspace imagery */}
       <div 
         className="absolute inset-0 bg-cover bg-center opacity-[0.08] pointer-events-none"
@@ -37,27 +37,25 @@ export default function LockInPage() {
         </Badge>
       </div>
 
-      {/* Main Content - Centered with proper spacing */}
-      <div className="min-h-full flex flex-col px-4 py-4 md:py-6 bg-gradient-to-br from-background via-card/20 to-background">
-        {/* Motivational Mantra - Compact */}
-        <div className="text-center max-w-2xl mx-auto mb-3 md:mb-4">
-          <p className="text-[10px] md:text-xs font-mono text-muted-foreground uppercase tracking-widest mb-1">
-            Current Mission
-          </p>
-          <h1 className="text-base md:text-xl lg:text-2xl font-black tracking-tight leading-tight" data-testid="text-current-intention">
-            Build the feature. Ship it today.
-          </h1>
-        </div>
+      {/* Motivational Mantra - Top Section */}
+      <div className="relative z-10 text-center max-w-2xl mx-auto px-4 pt-8 md:pt-12 pb-4 md:pb-6 flex-shrink-0">
+        <p className="text-[10px] md:text-xs font-mono text-muted-foreground uppercase tracking-widest mb-2">
+          Current Mission
+        </p>
+        <h1 className="text-base md:text-xl lg:text-2xl font-black tracking-tight leading-tight" data-testid="text-current-intention">
+          Build the feature. Ship it today.
+        </h1>
+      </div>
 
-        {/* Timer Component - Centered */}
-        <div className="flex-1 flex items-center justify-center">
-          <div className="w-full max-w-5xl">
-            <SessionTimer />
-          </div>
+      {/* Main Timer - Centered in remaining space */}
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 py-6">
+        <div className="w-full max-w-5xl">
+          <SessionTimer />
         </div>
+      </div>
 
-        {/* Bottom Section - Sticky */}
-        <div className="mt-4 space-y-3 md:space-y-4">
+      {/* Bottom Section - Always at bottom */}
+      <div className="relative z-10 flex-shrink-0 px-4 pb-4 md:pb-6 space-y-3 md:space-y-4">
           {/* Intensity Meter */}
           <div className="w-full max-w-md mx-auto">
             <div className="space-y-1.5">
@@ -100,7 +98,6 @@ export default function LockInPage() {
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   );
