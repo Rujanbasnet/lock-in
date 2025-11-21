@@ -3,7 +3,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/PageHeader";
 import { Calendar, Target, BookOpen, X, Loader2 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import workspaceImg from "@assets/generated_images/abstract_tech_workspace_background.png";
 
@@ -17,6 +17,7 @@ const reflectionPrompts = [
 export default function JournalPage() {
   const [reflection, setReflection] = useState("");
   const [isSaved, setIsSaved] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   
   // Fetch today's intention from the database
   const todayDate = new Date().toISOString().split('T')[0];
@@ -40,7 +41,17 @@ export default function JournalPage() {
 
   const handlePromptClick = (prompt: string) => {
     const promptLine = reflection ? `\n► ${prompt}\n` : `► ${prompt}\n`;
-    setReflection(reflection + promptLine);
+    const newValue = reflection + promptLine;
+    setReflection(newValue);
+    
+    // Focus textarea and position cursor at the end
+    setTimeout(() => {
+      if (textareaRef.current) {
+        textareaRef.current.focus();
+        textareaRef.current.selectionStart = newValue.length;
+        textareaRef.current.selectionEnd = newValue.length;
+      }
+    }, 0);
   };
 
   const intentionTypeLabels: Record<string, string> = {
@@ -139,6 +150,7 @@ export default function JournalPage() {
 
             {/* Journal Input */}
             <Textarea
+              ref={textareaRef}
               placeholder="Start writing your reflection. Be honest about your session..."
               className="min-h-[400px] resize-none text-sm leading-relaxed font-mono"
               value={reflection}
