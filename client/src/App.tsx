@@ -11,12 +11,14 @@ import IntentionPage from "@/pages/IntentionPage";
 import ActivitiesPage from "@/pages/ActivitiesPage";
 import JournalPage from "@/pages/JournalPage";
 import SettingsPage from "@/pages/SettingsPage";
+import LockInPage from "@/pages/LockInPage";
 import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Dashboard} />
+      <Route path="/lock-in" component={LockInPage} />
       <Route path="/intention" component={IntentionPage} />
       <Route path="/activities" component={ActivitiesPage} />
       <Route path="/journal" component={JournalPage} />

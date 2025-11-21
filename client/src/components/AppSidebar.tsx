@@ -9,14 +9,21 @@ import {
   SidebarMenuItem,
   SidebarFooter,
 } from "@/components/ui/sidebar";
-import { LayoutDashboard, Target, Activity, BookOpen, Settings } from "lucide-react";
+import { LayoutDashboard, Target, Activity, BookOpen, Settings, Zap } from "lucide-react";
 import { useLocation } from "wouter";
+import { Badge } from "@/components/ui/badge";
 
 const menuItems = [
   {
     title: "Dashboard",
     url: "/",
     icon: LayoutDashboard,
+  },
+  {
+    title: "Lock In",
+    url: "/lock-in",
+    icon: Zap,
+    badge: "New",
   },
   {
     title: "Intention",
@@ -59,9 +66,16 @@ export function AppSidebar() {
                     isActive={location === item.url}
                     data-testid={`link-${item.title.toLowerCase().replace(' ', '-')}`}
                   >
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
+                    <a href={item.url} className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <item.icon />
+                        <span>{item.title}</span>
+                      </div>
+                      {item.badge && (
+                        <Badge variant="secondary" className="text-xs">
+                          {item.badge}
+                        </Badge>
+                      )}
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
