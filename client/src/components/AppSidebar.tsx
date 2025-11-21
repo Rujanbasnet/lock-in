@@ -113,6 +113,7 @@ export function AppSidebar() {
             <button
               className="w-full flex items-center gap-3 rounded-md border border-sidebar-border p-3 bg-sidebar-accent/30 hover-elevate transition-all cursor-pointer"
               data-testid="button-user-menu"
+              onClick={(e) => e.stopPropagation()}
             >
               <div className="h-10 w-10 rounded-md bg-primary/20 flex items-center justify-center border border-primary/30 flex-shrink-0">
                 <span className="text-sm font-mono font-bold text-primary">JD</span>
