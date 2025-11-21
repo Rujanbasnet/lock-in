@@ -85,7 +85,7 @@ export default function Landing() {
           </div>
 
           {/* CTA */}
-          <div className="flex flex-col gap-4 justify-center items-center pt-4">
+          <div className="flex flex-col gap-4 justify-center items-center -mt-2">
             <Button 
               size="lg" 
               onClick={() => (window.location.href = "/api/login")} 
