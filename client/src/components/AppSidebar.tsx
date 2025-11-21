@@ -126,21 +126,24 @@ export function AppSidebar() {
               </div>
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56">
+          <DropdownMenuContent align="end" className="w-56" onClick={(e) => e.stopPropagation()}>
             <DropdownMenuItem asChild>
-              <a href="/settings" className="cursor-pointer flex items-center gap-2" data-testid="menu-item-settings">
+              <a href="/settings" className="cursor-pointer flex items-center gap-2" data-testid="menu-item-settings" onClick={(e) => e.stopPropagation()}>
                 <Settings className="h-4 w-4" />
                 <span>Settings</span>
               </a>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <a href="/pricing" className="cursor-pointer flex items-center gap-2" data-testid="menu-item-plan">
+              <a href="/pricing" className="cursor-pointer flex items-center gap-2" data-testid="menu-item-plan" onClick={(e) => e.stopPropagation()}>
                 <CreditCard className="h-4 w-4" />
                 <span>Plan</span>
               </a>
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={handleLogout}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleLogout();
+              }}
               className="cursor-pointer text-destructive focus:text-destructive flex items-center gap-2"
               data-testid="menu-item-logout"
             >
