@@ -56,10 +56,6 @@ function Router() {
     <>
       <AppSidebar />
       <div className="flex flex-col flex-1 min-w-0 w-full">
-        <header className="flex items-center justify-between gap-4 p-4 border-b border-border">
-          <SidebarTrigger data-testid="button-sidebar-toggle" />
-          <ThemeToggle />
-        </header>
         <main className="flex-1 overflow-hidden w-full">
           <AuthenticatedRouter />
         </main>
