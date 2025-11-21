@@ -22,7 +22,10 @@ export default function Landing() {
               Sign In
             </Button>
             <Button
-              onClick={() => (window.location.href = "/")}
+              onClick={() => {
+                localStorage.setItem("testMode", "true");
+                window.location.href = "/";
+              }}
               data-testid="button-test-enter"
               size="sm"
               variant="ghost"
