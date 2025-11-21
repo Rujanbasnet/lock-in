@@ -59,19 +59,10 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarHeader className="p-4 border-b border-sidebar-border flex items-center justify-between">
+      <SidebarHeader className="p-4 border-b border-sidebar-border flex items-center justify-center">
         <div className="flex items-center gap-2">
           {!isCollapsed && <LockInLogo variant="compact" className="text-lg" />}
         </div>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="h-8 w-8"
-          onClick={toggleSidebar}
-          data-testid="button-sidebar-minimize"
-        >
-          {isCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
-        </Button>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -105,7 +96,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="p-4 border-t border-sidebar-border">
+      <SidebarFooter className="p-4 border-t border-sidebar-border space-y-3">
         <div className="flex items-center gap-3 rounded-md border border-sidebar-border p-3 bg-sidebar-accent/30">
           <div className="h-10 w-10 rounded-md bg-primary/20 flex items-center justify-center border border-primary/30">
             <span className="text-sm font-mono font-bold text-primary">JD</span>
@@ -117,6 +108,16 @@ export function AppSidebar() {
             </div>
           </div>
         </div>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="w-full justify-center"
+          onClick={toggleSidebar}
+          data-testid="button-sidebar-minimize"
+        >
+          {isCollapsed ? <ChevronRight className="h-4 w-4 mr-2" /> : <ChevronLeft className="h-4 w-4 mr-2" />}
+          {!isCollapsed && (isCollapsed ? "Expand" : "Minimize")}
+        </Button>
       </SidebarFooter>
     </Sidebar>
   );
