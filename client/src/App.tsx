@@ -7,6 +7,7 @@ import { SidebarProvider, SidebarTrigger, useSidebar } from "@/components/ui/sid
 import { AppSidebar } from "@/components/AppSidebar";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useAuth } from "@/hooks/useAuth";
+import { useState, useRef } from "react";
 import Dashboard from "@/pages/Dashboard";
 import IntentionPage from "@/pages/IntentionPage";
 import ActivitiesPage from "@/pages/ActivitiesPage";
@@ -33,12 +34,38 @@ function AuthenticatedRouter() {
 }
 
 function AuthenticatedContent() {
-  const { state } = useSidebar();
+  const { state, toggleSidebar } = useSidebar();
   const isCollapsed = state === "collapsed";
+  const [isLocked, setIsLocked] = useState(false);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  const mainRef = useRef<HTMLDivElement>(null);
+
+  const handleMainClick = () => {
+    if (!isLocked && !isCollapsed) {
+      toggleSidebar();
+      setIsLocked(false);
+    }
+  };
+
+  const handleSidebarClick = () => {
+    setIsLocked(true);
+  };
+
+  const handleSidebarMouseLeave = () => {
+    if (!isLocked && !isCollapsed) {
+      toggleSidebar();
+    }
+  };
 
   return (
     <>
-      <AppSidebar />
+      <div
+        ref={sidebarRef}
+        onClick={handleSidebarClick}
+        onMouseLeave={handleSidebarMouseLeave}
+      >
+        <AppSidebar />
+      </div>
       {isCollapsed && (
         <SidebarTrigger
           data-testid="button-sidebar-expand"
@@ -47,7 +74,7 @@ function AuthenticatedContent() {
           <span className="text-xs font-bold text-primary opacity-0 group-hover:opacity-100">{'>'}</span>
         </SidebarTrigger>
       )}
-      <div className="flex flex-col flex-1 min-w-0 w-full">
+      <div className="flex flex-col flex-1 min-w-0 w-full" ref={mainRef} onClick={handleMainClick}>
         <main className="flex-1 overflow-hidden w-full">
           <AuthenticatedRouter />
         </main>
