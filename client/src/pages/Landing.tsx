@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Zap, Target, BarChart3, Lock, ArrowRight } from "lucide-react";
+import { Lock, ArrowRight } from "lucide-react";
 import { LockInLogo } from "@/components/LockInLogo";
 import workspaceImg from "@assets/generated_images/developer_focused_at_workstation.png";
 
@@ -101,62 +100,6 @@ export default function Landing() {
             </Button>
           </div>
 
-          {/* Features Grid */}
-          <div className="grid md:grid-cols-3 gap-6 pt-16 max-w-5xl mx-auto">
-            <Card className="border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-200 group">
-              <CardContent className="p-6 space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-chart-1/10 border border-chart-1/20 
-                                group-hover:bg-chart-1/20 transition-colors">
-                    <Target className="h-6 w-6 text-chart-1" />
-                  </div>
-                  <div className="text-xs font-mono font-bold text-chart-1 uppercase tracking-wider">01</div>
-                </div>
-                <div className="space-y-2">
-                  <h3 className="font-bold text-lg uppercase tracking-tight">Set Intent</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    No vague goals. Define exactly what you're building today. Commit or quit.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-200 group">
-              <CardContent className="p-6 space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 border border-primary/20 
-                                group-hover:bg-primary/20 transition-colors">
-                    <Zap className="h-6 w-6 text-primary" />
-                  </div>
-                  <div className="text-xs font-mono font-bold text-primary uppercase tracking-wider">02</div>
-                </div>
-                <div className="space-y-2">
-                  <h3 className="font-bold text-lg uppercase tracking-tight">Execute</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Start the timer. Enter deep work. Watch milliseconds tick. Stay ruthless.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-200 group">
-              <CardContent className="p-6 space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-chart-4/10 border border-chart-4/20 
-                                group-hover:bg-chart-4/20 transition-colors">
-                    <BarChart3 className="h-6 w-6 text-chart-4" />
-                  </div>
-                  <div className="text-xs font-mono font-bold text-chart-4 uppercase tracking-wider">03</div>
-                </div>
-                <div className="space-y-2">
-                  <h3 className="font-bold text-lg uppercase tracking-tight">Measure</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Track Lock In Time. Review output. Adjust intensity. Repeat tomorrow.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
 
           {/* Social Proof / Stats */}
           <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-12 pt-16 max-w-4xl mx-auto border-t border-border/50 px-4">
