@@ -1,10 +1,12 @@
 import { ActivityTimeline } from "@/components/ActivityTimeline";
 import { WeeklyOverview } from "@/components/WeeklyOverview";
+import { PageHeader } from "@/components/PageHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Zap, Target, BookOpen, BarChart3, ArrowRight, Timer, TrendingUp, Flame } from "lucide-react";
+import { Zap, Target, BookOpen, BarChart3, ArrowRight, Timer, TrendingUp, Flame, LayoutDashboard } from "lucide-react";
 import { useLocation } from "wouter";
+import workspaceImg from "@assets/generated_images/developer_focused_at_workstation.png";
 
 export default function Dashboard() {
   const [, navigate] = useLocation();
@@ -48,33 +50,37 @@ export default function Dashboard() {
 
   return (
     <div className="h-full overflow-auto">
+      <PageHeader 
+        icon={<LayoutDashboard className="h-6 w-6" />}
+        iconColor="text-primary"
+        title="Mission Control"
+        description="Execute the protocol. Lock in and ship. Your command center for ruthless productivity."
+        backgroundImage={workspaceImg}
+        gridColor="rgba(0, 217, 255, 0.4)"
+        gridOpacity={0.05}
+      />
+      
       <div className="max-w-7xl mx-auto p-6 lg:p-8 space-y-6">
-        {/* Header with Mission Control Feel */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <h1 className="text-4xl lg:text-5xl font-black tracking-tighter uppercase">
-                  Mission Control
-                </h1>
-                <Badge variant="outline" className="border-primary/50 text-primary font-mono text-xs">
-                  ACTIVE
-                </Badge>
-              </div>
-              <p className="text-muted-foreground font-medium">
-                Execute the protocol. Lock in and ship.
-              </p>
-            </div>
-            <Button 
-              size="lg"
-              onClick={() => navigate("/lock-in")}
-              data-testid="button-quick-lock-in"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/30 font-bold uppercase tracking-wide"
-            >
-              <Zap className="h-5 w-5 mr-2" />
-              Quick Lock In
-            </Button>
+        {/* Quick Action */}
+        <div className="flex items-center justify-between flex-wrap gap-4">
+          <div className="flex items-center gap-3">
+            <Badge variant="outline" className="border-primary/50 text-primary font-mono text-xs uppercase">
+              <div className="h-2 w-2 rounded-full bg-primary mr-2 animate-pulse" />
+              Online
+            </Badge>
+            <Badge variant="outline" className="border-destructive/50 text-destructive font-mono text-xs">
+              7 Day Streak
+            </Badge>
           </div>
+          <Button 
+            size="lg"
+            onClick={() => navigate("/lock-in")}
+            data-testid="button-quick-lock-in"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/30 font-bold uppercase tracking-wide"
+          >
+            <Zap className="h-5 w-5 mr-2" />
+            Quick Lock In
+          </Button>
         </div>
 
         {/* Performance Metrics - Mission Control Style */}

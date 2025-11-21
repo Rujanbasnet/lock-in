@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/PageHeader";
 import { Settings } from "lucide-react";
 import { useState } from "react";
+import workspaceImg from "@assets/generated_images/abstract_tech_workspace_background.png";
 
 export default function SettingsPage() {
   const [breakEnabled, setBreakEnabled] = useState(true);
@@ -14,9 +15,13 @@ export default function SettingsPage() {
   return (
     <div className="h-full overflow-auto">
       <PageHeader 
-        icon={<Settings className="h-6 w-6 text-muted-foreground" />}
+        icon={<Settings className="h-6 w-6" />}
+        iconColor="text-muted-foreground"
         title="Settings"
         description="Configure your Lock In experience and manage your account."
+        backgroundImage={workspaceImg}
+        gridColor="rgba(100, 100, 100, 0.3)"
+        gridOpacity={0.03}
       />
       
       <div className="max-w-3xl mx-auto p-6 md:p-8 space-y-6 md:space-y-8">

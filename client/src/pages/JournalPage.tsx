@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/PageHeader";
 import { Calendar, Target, BookOpen } from "lucide-react";
 import { useState } from "react";
+import workspaceImg from "@assets/generated_images/abstract_tech_workspace_background.png";
 
 export default function JournalPage() {
   const [reflection, setReflection] = useState("");
@@ -32,9 +33,13 @@ export default function JournalPage() {
   return (
     <div className="h-full overflow-auto">
       <PageHeader 
-        icon={<BookOpen className="h-6 w-6 text-secondary" />}
+        icon={<BookOpen className="h-6 w-6" />}
+        iconColor="text-secondary"
         title="Debrief & Reflect"
         description="Compare your intention with what you accomplished. What worked? What didn't? Stay honest, stay ruthless."
+        backgroundImage={workspaceImg}
+        gridColor="rgba(255, 0, 110, 0.3)"
+        gridOpacity={0.04}
       />
 
       <div className="max-w-4xl mx-auto p-8 space-y-8">

@@ -8,6 +8,8 @@ interface PageHeaderProps {
   backgroundImage?: string;
   iconColor?: string;
   titleColor?: string;
+  gridOpacity?: number;
+  gridColor?: string;
 }
 
 export function PageHeader({ 
@@ -17,7 +19,9 @@ export function PageHeader({
   className = "",
   backgroundImage,
   iconColor = "text-primary",
-  titleColor = "text-foreground"
+  titleColor = "text-foreground",
+  gridOpacity = 0.03,
+  gridColor = "rgba(0, 217, 255, 0.4)"
 }: PageHeaderProps) {
   return (
     <div className={`relative border-b border-border bg-card/30 backdrop-blur-sm overflow-hidden ${className}`}>
@@ -33,11 +37,13 @@ export function PageHeader({
       )}
       
       {/* Tech grid overlay */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-           style={{
-             backgroundImage: 'linear-gradient(rgba(0, 217, 255, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 217, 255, 0.4) 1px, transparent 1px)',
-             backgroundSize: '32px 32px'
-           }} 
+      <div 
+        className="absolute inset-0 pointer-events-none" 
+        style={{
+          backgroundImage: `linear-gradient(${gridColor} 1px, transparent 1px), linear-gradient(90deg, ${gridColor} 1px, transparent 1px)`,
+          backgroundSize: '32px 32px',
+          opacity: gridOpacity
+        }} 
       />
       
       <div className="relative max-w-7xl mx-auto px-6 py-6">

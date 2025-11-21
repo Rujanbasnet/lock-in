@@ -2,6 +2,7 @@ import { ActivityLogger } from "@/components/ActivityLogger";
 import { ActivityTimeline } from "@/components/ActivityTimeline";
 import { PageHeader } from "@/components/PageHeader";
 import { Activity } from "lucide-react";
+import workspaceImg from "@assets/generated_images/abstract_tech_workspace_background.png";
 
 export default function ActivitiesPage() {
   const mockActivities = [
@@ -42,9 +43,13 @@ export default function ActivitiesPage() {
   return (
     <div className="h-full overflow-auto">
       <PageHeader 
-        icon={<Activity className="h-6 w-6 text-chart-4" />}
+        icon={<Activity className="h-6 w-6" />}
+        iconColor="text-chart-4"
         title="Activity Log"
         description="See exactly how you locked in today. Track your Deep Work, Creative, Social, and Rest sessions throughout the day."
+        backgroundImage={workspaceImg}
+        gridColor="rgba(255, 184, 0, 0.3)"
+        gridOpacity={0.04}
       />
       
       <div className="max-w-7xl mx-auto p-6 md:p-8 space-y-6 md:space-y-8">

@@ -1,10 +1,17 @@
 import { SessionTimer } from "@/components/SessionTimer";
 import { Badge } from "@/components/ui/badge";
 import { Lock, Zap } from "lucide-react";
+import workspaceImg from "@assets/generated_images/abstract_tech_workspace_background.png";
 
 export default function LockInPage() {
   return (
     <div className="h-full overflow-auto relative">
+      {/* Subtle background workspace imagery */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center opacity-[0.08] pointer-events-none"
+        style={{ backgroundImage: `url(${workspaceImg})` }}
+      />
+      
       {/* Animated Progress Beams - Top and Bottom */}
       <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent 
                     animate-pulse opacity-60 z-20" />
