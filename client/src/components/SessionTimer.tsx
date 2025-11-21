@@ -179,17 +179,17 @@ export function SessionTimer() {
           )}
         </div>
 
-        <div className="relative p-8 md:p-12 text-center space-y-6">
+        <div className="relative p-4 md:p-6 text-center space-y-4">
           {/* Focus Time - Main Big Timer */}
-          <div className="space-y-2">
-            <div className="text-xs font-bold text-primary uppercase tracking-widest mb-3">
+          <div className="space-y-1">
+            <div className="text-[9px] font-bold text-primary uppercase tracking-widest mb-2">
               Focus Time
             </div>
             <div className="flex items-end justify-center gap-0 md:gap-1">
               <div
                 className="font-mono tabular-nums leading-none text-primary"
                 style={{
-                  fontSize: "clamp(80px, 20vw, 180px)",
+                  fontSize: "clamp(48px, 12vw, 100px)",
                   fontWeight: "900",
                   letterSpacing: "-0.03em",
                 }}
@@ -201,11 +201,11 @@ export function SessionTimer() {
               <div
                 className="font-mono tabular-nums leading-none"
                 style={{
-                  fontSize: "clamp(40px, 10vw, 80px)",
+                  fontSize: "clamp(24px, 6vw, 48px)",
                   fontWeight: "700",
                   letterSpacing: "-0.02em",
                   color: "hsl(var(--muted-foreground))",
-                  marginBottom: "clamp(8px, 3vw, 20px)",
+                  marginBottom: "clamp(6px, 2vw, 16px)",
                 }}
               >
                 .{String(focusMillisecondsOnly).padStart(2, "0")}
@@ -214,15 +214,15 @@ export function SessionTimer() {
           </div>
 
           {/* Break Time - Secondary Timer */}
-          <div className="space-y-2 pt-4 border-t border-border/30">
-            <div className="text-xs font-bold text-secondary uppercase tracking-widest mb-3">
+          <div className="space-y-1 pt-3 border-t border-border/30">
+            <div className="text-[9px] font-bold text-secondary uppercase tracking-widest mb-2">
               Break Time
             </div>
             <div className="flex items-end justify-center gap-0 md:gap-1">
               <div
                 className="font-mono tabular-nums leading-none text-secondary"
                 style={{
-                  fontSize: "clamp(48px, 12vw, 100px)",
+                  fontSize: "clamp(32px, 8vw, 64px)",
                   fontWeight: "800",
                   letterSpacing: "-0.03em",
                 }}
@@ -234,11 +234,11 @@ export function SessionTimer() {
               <div
                 className="font-mono tabular-nums leading-none"
                 style={{
-                  fontSize: "clamp(28px, 7vw, 56px)",
+                  fontSize: "clamp(16px, 4vw, 32px)",
                   fontWeight: "700",
                   letterSpacing: "-0.02em",
                   color: "hsl(var(--muted-foreground))",
-                  marginBottom: "clamp(4px, 2vw, 12px)",
+                  marginBottom: "clamp(4px, 1.5vw, 8px)",
                 }}
               >
                 .{String(breakMillisecondsOnly).padStart(2, "0")}
