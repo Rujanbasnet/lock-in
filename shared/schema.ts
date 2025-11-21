@@ -1,16 +1,38 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, integer } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, integer, index, jsonb } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
+// Sessions table (required for Replit Auth)
+export const sessions = pgTable(
+  "sessions",
+  {
+    sid: varchar("sid").primaryKey(),
+    sess: jsonb("sess").notNull(),
+    expire: timestamp("expire").notNull(),
+  },
+  (table) => [index("IDX_session_expire").on(table.expire)],
+);
+
+// Users table (required for Replit Auth + Stripe)
 export const users = pgTable("users", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  username: text("username").notNull().unique(),
-  password: text("password").notNull(),
+  email: varchar("email").unique(),
+  firstName: varchar("first_name"),
+  lastName: varchar("last_name"),
+  profileImageUrl: varchar("profile_image_url"),
+  stripeCustomerId: varchar("stripe_customer_id"),
+  stripeSubscriptionId: varchar("stripe_subscription_id"),
+  trialEndsAt: timestamp("trial_ends_at"),
+  subscriptionStatus: varchar("subscription_status").default("free"), // free, trial, active, cancelled
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+// App data tables
 export const intentions = pgTable("intentions", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull(),
   date: text("date").notNull(),
   type: text("type").notNull(),
   content: text("content"),
@@ -19,6 +41,7 @@ export const intentions = pgTable("intentions", {
 
 export const activities = pgTable("activities", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull(),
   name: text("name").notNull(),
   category: text("category").notNull(),
   duration: integer("duration").notNull(),
@@ -29,6 +52,7 @@ export const activities = pgTable("activities", {
 
 export const journalEntries = pgTable("journal_entries", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull(),
   date: text("date").notNull(),
   intentionId: varchar("intention_id"),
   content: text("content").notNull(),
@@ -36,16 +60,12 @@ export const journalEntries = pgTable("journal_entries", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
-export const breakSettings = pgTable("break_settings", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  intervalMinutes: integer("interval_minutes").notNull().default(60),
-  enabled: integer("enabled").notNull().default(1),
-});
-
-export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
-});
+// Types
+export type UpsertUser = typeof users.$inferInsert;
+export type User = typeof users.$inferSelect;
+export type Intention = typeof intentions.$inferSelect;
+export type Activity = typeof activities.$inferSelect;
+export type JournalEntry = typeof journalEntries.$inferSelect;
 
 export const insertIntentionSchema = createInsertSchema(intentions).omit({
   id: true,
@@ -62,18 +82,3 @@ export const insertJournalEntrySchema = createInsertSchema(journalEntries).omit(
   createdAt: true,
   updatedAt: true,
 });
-
-export const insertBreakSettingsSchema = createInsertSchema(breakSettings).omit({
-  id: true,
-});
-
-export type InsertUser = z.infer<typeof insertUserSchema>;
-export type User = typeof users.$inferSelect;
-export type Intention = typeof intentions.$inferSelect;
-export type InsertIntention = z.infer<typeof insertIntentionSchema>;
-export type Activity = typeof activities.$inferSelect;
-export type InsertActivity = z.infer<typeof insertActivitySchema>;
-export type JournalEntry = typeof journalEntries.$inferSelect;
-export type InsertJournalEntry = z.infer<typeof insertJournalEntrySchema>;
-export type BreakSettings = typeof breakSettings.$inferSelect;
-export type InsertBreakSettings = z.infer<typeof insertBreakSettingsSchema>;
