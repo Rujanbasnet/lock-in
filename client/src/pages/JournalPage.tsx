@@ -2,13 +2,22 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/PageHeader";
-import { Calendar, Target, BookOpen } from "lucide-react";
+import { Calendar, Target, BookOpen, X } from "lucide-react";
 import { useState } from "react";
 import workspaceImg from "@assets/generated_images/abstract_tech_workspace_background.png";
+
+const reflectionPrompts = [
+  "How aligned were you with your intention?",
+  "What was the biggest win from your session?",
+  "What slowed you down or distracted you?",
+  "What will you do differently tomorrow?",
+];
 
 export default function JournalPage() {
   const [reflection, setReflection] = useState("");
   const [isSaved, setIsSaved] = useState(false);
+  const [selectedPrompts, setSelectedPrompts] = useState<string[]>([]);
+  const [promptAnswers, setPromptAnswers] = useState<Record<string, string>>({});
   
   // Mock intention from earlier (in real app, would come from state management)
   const todayIntention = {
@@ -17,10 +26,41 @@ export default function JournalPage() {
   };
 
   const handleSaveReflection = () => {
-    console.log("Reflection saved:", reflection);
+    console.log("Reflection saved:", {
+      reflection,
+      prompts: selectedPrompts.map(prompt => ({
+        prompt,
+        answer: promptAnswers[prompt]
+      }))
+    });
     setIsSaved(true);
     setTimeout(() => setIsSaved(false), 3000);
     setReflection("");
+    setSelectedPrompts([]);
+    setPromptAnswers({});
+  };
+
+  const handlePromptClick = (prompt: string) => {
+    if (selectedPrompts.includes(prompt)) {
+      setSelectedPrompts(selectedPrompts.filter(p => p !== prompt));
+      const newAnswers = { ...promptAnswers };
+      delete newAnswers[prompt];
+      setPromptAnswers(newAnswers);
+    } else {
+      setSelectedPrompts([...selectedPrompts, prompt]);
+      setPromptAnswers({ ...promptAnswers, [prompt]: "" });
+    }
+  };
+
+  const handlePromptAnswerChange = (prompt: string, answer: string) => {
+    setPromptAnswers({ ...promptAnswers, [prompt]: answer });
+  };
+
+  const handleRemovePrompt = (prompt: string) => {
+    setSelectedPrompts(selectedPrompts.filter(p => p !== prompt));
+    const newAnswers = { ...promptAnswers };
+    delete newAnswers[prompt];
+    setPromptAnswers(newAnswers);
   };
 
   const intentionTypeLabels: Record<string, string> = {
@@ -93,18 +133,20 @@ export default function JournalPage() {
             <div className="space-y-2">
               <p className="text-sm text-muted-foreground font-semibold">Reflection prompts:</p>
               <div className="space-y-2">
-                <div className="p-3 rounded-lg bg-muted/50 hover-elevate cursor-pointer">
-                  <p className="text-sm font-medium">How aligned were you with your intention?</p>
-                </div>
-                <div className="p-3 rounded-lg bg-muted/50 hover-elevate cursor-pointer">
-                  <p className="text-sm font-medium">What was the biggest win from your session?</p>
-                </div>
-                <div className="p-3 rounded-lg bg-muted/50 hover-elevate cursor-pointer">
-                  <p className="text-sm font-medium">What slowed you down or distracted you?</p>
-                </div>
-                <div className="p-3 rounded-lg bg-muted/50 hover-elevate cursor-pointer">
-                  <p className="text-sm font-medium">What will you do differently tomorrow?</p>
-                </div>
+                {reflectionPrompts.map((prompt) => (
+                  <div
+                    key={prompt}
+                    onClick={() => handlePromptClick(prompt)}
+                    className={`p-3 rounded-lg cursor-pointer transition-colors ${
+                      selectedPrompts.includes(prompt)
+                        ? "bg-primary/20 border border-primary/50"
+                        : "bg-muted/50 hover-elevate"
+                    }`}
+                    data-testid={`button-prompt-${reflectionPrompts.indexOf(prompt)}`}
+                  >
+                    <p className="text-sm font-medium">{prompt}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -116,6 +158,36 @@ export default function JournalPage() {
               onChange={(e) => setReflection(e.target.value)}
               data-testid="textarea-reflection"
             />
+
+            {/* Selected Prompts with Answers */}
+            {selectedPrompts.length > 0 && (
+              <div className="space-y-4 pt-4 border-t border-border/30">
+                <p className="text-sm text-muted-foreground font-semibold">Answer your selected prompts:</p>
+                {selectedPrompts.map((prompt) => (
+                  <div key={prompt} className="space-y-2 p-4 rounded-lg bg-muted/30 border border-border/50">
+                    <div className="flex items-start justify-between gap-2">
+                      <h4 className="text-sm font-semibold text-foreground">{prompt}</h4>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleRemovePrompt(prompt)}
+                        className="h-6 w-6 p-0"
+                        data-testid={`button-remove-prompt-${reflectionPrompts.indexOf(prompt)}`}
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    <Textarea
+                      placeholder="Write your answer..."
+                      className="min-h-[120px] resize-none text-sm"
+                      value={promptAnswers[prompt] || ""}
+                      onChange={(e) => handlePromptAnswerChange(prompt, e.target.value)}
+                      data-testid={`textarea-answer-${reflectionPrompts.indexOf(prompt)}`}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
 
             {/* Save */}
             <div className="flex items-center justify-between">
