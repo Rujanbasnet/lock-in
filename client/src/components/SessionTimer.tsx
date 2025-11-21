@@ -248,31 +248,31 @@ export function SessionTimer() {
 
           {/* Current Mode Label */}
           {currentModeData && (
-            <div className="flex flex-col items-center gap-3 pt-4">
-              <div className="flex items-center gap-3 justify-center">
+            <div className="flex flex-col items-center gap-2 pt-2">
+              <div className="flex items-center gap-2 justify-center">
                 <currentModeData.icon
-                  className={`h-8 w-8 ${currentModeData.textColor}`}
+                  className={`h-5 w-5 ${currentModeData.textColor}`}
                 />
                 <span
-                  className={`text-3xl md:text-4xl font-bold ${currentModeData.textColor}`}
+                  className={`text-lg md:text-2xl font-bold ${currentModeData.textColor}`}
                   data-testid="text-current-mode"
                 >
                   {currentModeData.label}
                 </span>
               </div>
               {isRunning && (
-                <div className="text-sm text-muted-foreground animate-pulse">
+                <div className="text-xs text-muted-foreground animate-pulse">
                   ● Session Running
                 </div>
               )}
               {!isRunning && currentMode && (
-                <div className="text-sm text-muted-foreground">Ready to start</div>
+                <div className="text-xs text-muted-foreground">Ready to start</div>
               )}
             </div>
           )}
 
           {!currentMode && (
-            <div className="text-lg text-muted-foreground pt-4">Select a mode to begin</div>
+            <div className="text-sm text-muted-foreground pt-2">Select a mode to begin</div>
           )}
         </div>
       </div>
@@ -282,7 +282,7 @@ export function SessionTimer() {
         <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4 block">
           Switch Mode (Anytime)
         </label>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {modes.map((mode) => {
             const Icon = mode.icon;
             const isActive = currentMode === mode.id;
@@ -297,7 +297,7 @@ export function SessionTimer() {
                 onClick={() => handleModeChange(mode.id)}
                 data-testid={`button-mode-${mode.id}`}
                 className={`
-                  relative overflow-hidden rounded-lg border transition-all p-4
+                  relative overflow-hidden rounded-lg border transition-all p-3
                   hover-elevate active-elevate-2 cursor-pointer
                   ${
                     isActive
@@ -306,20 +306,20 @@ export function SessionTimer() {
                   }
                 `}
               >
-                <div className="relative flex flex-col items-center gap-2 text-center">
+                <div className="relative flex flex-col items-center gap-1 text-center">
                   <Icon
-                    className={`h-6 w-6 transition-colors ${
+                    className={`h-4 w-4 transition-colors ${
                       isActive ? mode.textColor : "text-muted-foreground"
                     }`}
                   />
                   <span
-                    className={`text-sm font-bold transition-colors ${
+                    className={`text-xs font-bold transition-colors ${
                       isActive ? mode.textColor : "text-foreground"
                     }`}
                   >
                     {mode.label}
                   </span>
-                  <span className="text-xs text-muted-foreground font-mono mt-1">
+                  <span className="text-[10px] text-muted-foreground font-mono mt-0.5">
                     {String(modeHours).padStart(2, "0")}:{String(modeMinutes).padStart(2, "0")}:
                     {String(modeSecsOnly).padStart(2, "0")}
                   </span>
@@ -397,7 +397,7 @@ export function SessionTimer() {
               )}
 
               {/* Individual Mode Times */}
-              <div className="grid grid-cols-2 gap-3 pt-2">
+              <div className="grid grid-cols-2 gap-2 pt-2">
                 {modes.map((mode) => {
                   const modeSeconds = Math.floor(modeTimers[mode.id] / 1000);
                   const modeHours = Math.floor(modeSeconds / 3600);
@@ -409,14 +409,14 @@ export function SessionTimer() {
                   return (
                     <div
                       key={mode.id}
-                      className="flex items-center justify-between text-sm p-3 rounded-lg bg-muted/40 border border-border/50"
+                      className="flex items-center justify-between text-xs p-2 rounded-lg bg-muted/40 border border-border/50"
                       data-testid={`timer-${mode.id}`}
                     >
-                      <div className="flex items-center gap-2">
-                        <mode.icon className={`h-4 w-4 ${mode.textColor}`} />
-                        <span className="font-medium">{mode.label}</span>
+                      <div className="flex items-center gap-1.5">
+                        <mode.icon className={`h-3 w-3 ${mode.textColor}`} />
+                        <span className="font-medium text-[11px]">{mode.label}</span>
                       </div>
-                      <span className="font-mono font-bold text-foreground">
+                      <span className="font-mono font-bold text-foreground text-[10px]">
                         {String(modeHours).padStart(2, "0")}:{String(modeMinutes).padStart(2, "0")}:
                         {String(modeSecsOnly).padStart(2, "0")}
                       </span>

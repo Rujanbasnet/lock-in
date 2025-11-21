@@ -9,10 +9,12 @@ import {
   SidebarMenuItem,
   SidebarFooter,
   SidebarHeader,
+  useSidebar,
 } from "@/components/ui/sidebar";
-import { LayoutDashboard, Target, Activity, BookOpen, Settings, Zap } from "lucide-react";
+import { LayoutDashboard, Target, Activity, BookOpen, Settings, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLocation } from "wouter";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { LockInLogo } from "@/components/LockInLogo";
 
 const menuItems = [
@@ -52,13 +54,24 @@ const menuItems = [
 export function AppSidebar() {
   const [location] = useLocation();
   const isLockInActive = location === "/lock-in";
+  const { toggleSidebar, state } = useSidebar();
+  const isCollapsed = state === "collapsed";
 
   return (
     <Sidebar>
-      <SidebarHeader className="p-4 border-b border-sidebar-border">
+      <SidebarHeader className="p-4 border-b border-sidebar-border flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <LockInLogo variant="compact" className="text-lg" />
+          {!isCollapsed && <LockInLogo variant="compact" className="text-lg" />}
         </div>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-8 w-8"
+          onClick={toggleSidebar}
+          data-testid="button-sidebar-minimize"
+        >
+          {isCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+        </Button>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
