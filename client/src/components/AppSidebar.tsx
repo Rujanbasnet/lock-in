@@ -109,10 +109,11 @@ export function AppSidebar() {
             </div>
           </div>
         </div>
-        <SidebarTrigger asChild data-testid="button-sidebar-toggle">
-          <button className="w-full flex items-center justify-center h-8 rounded-md hover:bg-sidebar-accent/50 transition-colors font-mono text-sm font-bold text-muted-foreground">
-            {isCollapsed ? ">>" : "<<"}
-          </button>
+        <SidebarTrigger 
+          data-testid="button-sidebar-toggle"
+          className="w-full h-8 font-mono text-sm font-bold"
+        >
+          {isCollapsed ? ">>" : "<<"}
         </SidebarTrigger>
       </SidebarFooter>
     </Sidebar>
