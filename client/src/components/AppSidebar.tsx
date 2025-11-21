@@ -12,7 +12,13 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { LayoutDashboard, Target, Activity, BookOpen, Settings, Zap, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { LayoutDashboard, Target, Activity, BookOpen, Settings, Zap, ChevronLeft, ChevronRight, LogOut, CreditCard } from "lucide-react";
 import { useLocation } from "wouter";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -102,21 +108,46 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="p-3 border-t border-sidebar-border">
-        <button
-          onClick={handleLogout}
-          className="w-full flex items-center gap-3 rounded-md border border-sidebar-border p-3 bg-sidebar-accent/30 hover-elevate transition-all cursor-pointer"
-          data-testid="button-logout"
-        >
-          <div className="h-10 w-10 rounded-md bg-primary/20 flex items-center justify-center border border-primary/30 flex-shrink-0">
-            <span className="text-sm font-mono font-bold text-primary">JD</span>
-          </div>
-          <div className="flex-1 min-w-0 text-left">
-            <div className="font-bold text-sm truncate">John Doe</div>
-            <div className="text-xs text-muted-foreground font-mono">
-              <span className="text-destructive font-bold">7</span> day streak
-            </div>
-          </div>
-        </button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              className="w-full flex items-center gap-3 rounded-md border border-sidebar-border p-3 bg-sidebar-accent/30 hover-elevate transition-all cursor-pointer"
+              data-testid="button-user-menu"
+            >
+              <div className="h-10 w-10 rounded-md bg-primary/20 flex items-center justify-center border border-primary/30 flex-shrink-0">
+                <span className="text-sm font-mono font-bold text-primary">JD</span>
+              </div>
+              <div className="flex-1 min-w-0 text-left">
+                <div className="font-bold text-sm truncate">John Doe</div>
+                <div className="text-xs text-muted-foreground font-mono">
+                  <span className="text-destructive font-bold">7</span> day streak
+                </div>
+              </div>
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuItem asChild>
+              <a href="/settings" className="cursor-pointer flex items-center gap-2" data-testid="menu-item-settings">
+                <Settings className="h-4 w-4" />
+                <span>Settings</span>
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a href="/pricing" className="cursor-pointer flex items-center gap-2" data-testid="menu-item-plan">
+                <CreditCard className="h-4 w-4" />
+                <span>Plan</span>
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={handleLogout}
+              className="cursor-pointer text-destructive focus:text-destructive flex items-center gap-2"
+              data-testid="menu-item-logout"
+            >
+              <LogOut className="h-4 w-4" />
+              <span>Logout</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </SidebarFooter>
     </Sidebar>
   );
