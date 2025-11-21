@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/PageHeader";
 import { Settings } from "lucide-react";
 import { useState } from "react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import workspaceImg from "@assets/generated_images/abstract_tech_workspace_background.png";
 
 export default function SettingsPage() {
@@ -25,6 +26,26 @@ export default function SettingsPage() {
       />
       
       <div className="max-w-3xl mx-auto p-6 md:p-8 space-y-6 md:space-y-8">
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Appearance</CardTitle>
+            <CardDescription>
+              Customize how Lock In looks for you
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="flex items-center justify-between gap-4">
+              <div className="space-y-0.5">
+                <Label>Theme</Label>
+                <p className="text-sm text-muted-foreground">
+                  Switch between light and dark mode
+                </p>
+              </div>
+              <ThemeToggle />
+            </div>
+          </CardContent>
+        </Card>
 
         <Card>
           <CardHeader>

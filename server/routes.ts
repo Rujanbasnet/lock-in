@@ -12,6 +12,16 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export async function registerRoutes(app: Express): Promise<Server> {
   await setupAuth(app);
 
+  // Logout endpoint
+  app.get('/api/logout', (req: any, res) => {
+    req.logout((err: any) => {
+      if (err) {
+        return res.status(500).json({ message: "Logout failed" });
+      }
+      res.redirect('/');
+    });
+  });
+
   // Auth user endpoint
   app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
     try {

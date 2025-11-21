@@ -13,14 +13,26 @@ export default function Landing() {
           <div className="flex items-center gap-3">
             <LockInLogo variant="compact" className="text-xl" />
           </div>
-          <Button 
-            onClick={() => (window.location.href = "/api/login")} 
-            data-testid="button-login"
-            variant="outline"
-            className="border-primary/50 text-primary hover:bg-primary/10"
-          >
-            Sign In
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button 
+              onClick={() => (window.location.href = "/api/login")} 
+              data-testid="button-login"
+              variant="outline"
+              className="border-primary/50 text-primary hover:bg-primary/10"
+            >
+              Sign In
+            </Button>
+            <Button
+              onClick={() => (window.location.href = "/")}
+              data-testid="button-test-enter"
+              size="sm"
+              variant="ghost"
+              className="text-xs"
+              title="Test the app without signing in"
+            >
+              Test
+            </Button>
+          </div>
         </div>
       </div>
 
