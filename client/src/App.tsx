@@ -78,7 +78,7 @@ function AuthenticatedContent() {
         </SidebarTrigger>
       )}
       <div className="flex flex-col flex-1 min-w-0 w-full" ref={mainRef} onClick={handleMainClick}>
-        <main className="flex-1 overflow-hidden w-full">
+        <main className="flex-1 w-full h-full overflow-auto">
           <AuthenticatedRouter />
         </main>
       </div>

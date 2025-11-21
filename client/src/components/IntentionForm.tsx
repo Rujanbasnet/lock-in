@@ -88,17 +88,15 @@ export function IntentionForm({ onSave }: IntentionFormProps) {
                   className={`
                     relative rounded-lg border p-4 text-center transition-all
                     hover-elevate active-elevate-2
-                    ${
-                      isSelected
-                        ? `border-2 border-current bg-primary/5`
-                        : "border-border bg-card"
+                    ${isSelected
+                      ? `border-2 border-current bg-primary/5`
+                      : "border-border bg-card"
                     }
                   `}
                 >
                   <Icon
-                    className={`h-6 w-6 mx-auto mb-2 ${
-                      isSelected ? mode.color : "text-muted-foreground"
-                    }`}
+                    className={`h-6 w-6 mx-auto mb-2 ${isSelected ? mode.color : "text-muted-foreground"
+                      }`}
                   />
                   <div className={`font-semibold text-sm ${isSelected ? mode.color : ""}`}>
                     {mode.label}
@@ -116,7 +114,7 @@ export function IntentionForm({ onSave }: IntentionFormProps) {
             Today my intention is to...
           </label>
           <Textarea
-            placeholder="Examples:&#10;• Get this feature into production&#10;• Start Chapter 2&#10;• Debug the API endpoint&#10;• Design the landing page"
+            placeholder="Examples:&#10;• I will study Chapter 4 of Biology&#10;• I will finish my History assignment&#10;• I will come up with a video idea&#10;• I will fix the login bug"
             className="min-h-[120px] resize-none text-base"
             value={content}
             onChange={(e) => setContent(e.target.value)}

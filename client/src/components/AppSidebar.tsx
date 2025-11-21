@@ -23,6 +23,7 @@ import { useLocation } from "wouter";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { LockInLogo } from "@/components/LockInLogo";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const menuItems = [
   {
@@ -108,7 +109,11 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="p-3 border-t border-sidebar-border/50">
+      <SidebarFooter className="p-3 border-t border-sidebar-border/50 flex flex-col gap-2">
+        <div className="flex items-center justify-between px-2">
+          <span className="text-[10px] uppercase text-muted-foreground font-mono tracking-widest">Theme</span>
+          <ThemeToggle />
+        </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button

@@ -1,0 +1,17 @@
+[36mvite v5.4.20 [32mbuilding for production...[36m[39m
+transforming...
+[32m✓[39m 3 modules transformed.
+[31mx[39m Build failed in 539ms
+[31merror during build:
+[31m[vite:css] [postcss] C:/Lock In/lock-in-main/client/src/index.css:74:3: Unexpected }[31m
+file: [36mC:/Lock In/lock-in-main/client/src/index.css:74:2[31m
+    at Input.error (C:\Lock In\lock-in-main\node_modules\postcss\lib\input.js:106:16)
+    at Parser.unexpectedClose (C:\Lock In\lock-in-main\node_modules\postcss\lib\parser.js:585:22)
+    at Parser.end (C:\Lock In\lock-in-main\node_modules\postcss\lib\parser.js:330:12)
+    at Parser.parse (C:\Lock In\lock-in-main\node_modules\postcss\lib\parser.js:454:16)
+    at parse (C:\Lock In\lock-in-main\node_modules\postcss\lib\parse.js:11:12)
+    at new LazyResult (C:\Lock In\lock-in-main\node_modules\postcss\lib\lazy-result.js:133:16)
+    at Processor.process (C:\Lock In\lock-in-main\node_modules\postcss\lib\processor.js:53:14)
+    at compileCSS (file:///C:/Lock%20In/lock-in-main/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:36898:59)
+    at async Object.transform (file:///C:/Lock%20In/lock-in-main/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:36171:11)
+    at async transform (file:///C:/Lock%20In/lock-in-main/node_modules/rollup/dist/es/shared/node-entry.js:19640:16)[39m

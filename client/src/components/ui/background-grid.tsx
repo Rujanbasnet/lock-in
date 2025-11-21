@@ -11,25 +11,25 @@ export function BackgroundGrid() {
                 return {
                     primary: 'bg-destructive/10',
                     secondary: 'bg-orange-500/10',
-                    grid: 'bg-[linear-gradient(to_right,#ff4b4b2e_1px,transparent_1px),linear-gradient(to_bottom,#ff4b4b2e_1px,transparent_1px)]'
+                    grid: 'bg-[linear-gradient(to_right,hsl(var(--destructive))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--destructive))_1px,transparent_1px)] opacity-20'
                 };
             case '/journal':
                 return {
                     primary: 'bg-green-500/10',
                     secondary: 'bg-emerald-500/10',
-                    grid: 'bg-[linear-gradient(to_right,#10b9812e_1px,transparent_1px),linear-gradient(to_bottom,#10b9812e_1px,transparent_1px)]'
+                    grid: 'bg-[linear-gradient(to_right,hsl(var(--secondary))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--secondary))_1px,transparent_1px)] opacity-20'
                 };
             case '/settings':
                 return {
                     primary: 'bg-slate-500/10',
                     secondary: 'bg-gray-500/10',
-                    grid: 'bg-[linear-gradient(to_right,#64748b2e_1px,transparent_1px),linear-gradient(to_bottom,#64748b2e_1px,transparent_1px)]'
+                    grid: 'bg-[linear-gradient(to_right,hsl(var(--muted-foreground))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--muted-foreground))_1px,transparent_1px)] opacity-10'
                 };
             default:
                 return {
                     primary: 'bg-primary/10',
                     secondary: 'bg-secondary/10',
-                    grid: 'bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)]'
+                    grid: 'bg-[linear-gradient(to_right,hsl(var(--primary))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary))_1px,transparent_1px)] opacity-15'
                 };
         }
     };

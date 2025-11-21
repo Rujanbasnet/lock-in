@@ -1,8 +1,9 @@
 import { SessionTimer } from "@/components/SessionTimer";
 import { Badge } from "@/components/ui/badge";
 import { Lock, Zap } from "lucide-react";
-import workspaceImg from "@assets/generated_images/abstract_tech_workspace_background.png";
 import { useQuery } from "@tanstack/react-query";
+
+import { FlowGuide } from "@/components/FlowGuide";
 
 export default function LockInPage() {
   const today = new Date().toISOString().split('T')[0];
@@ -10,14 +11,17 @@ export default function LockInPage() {
     queryKey: ['/api/intentions', today],
   });
 
-  const userIntention = (Array.isArray(intentions) && intentions[0]?.content) || "Create it, Build it, Ship it";
+  const userIntention =
+    (Array.isArray(intentions) && intentions[0]?.content) ||
+    localStorage.getItem("currentIntention") ||
+    "Create it, Build it, Ship it";
 
   return (
     <div className="h-full w-full overflow-auto relative flex flex-col bg-background/50">
       {/* Subtle background workspace imagery */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-[0.08] pointer-events-none"
-        style={{ backgroundImage: `url(${workspaceImg})` }}
+        className="absolute inset-0 bg-cover bg-center opacity-[0.05] pointer-events-none"
+        style={{ backgroundImage: `url('/focus_discipline_abstract_1763764445869.png')` }}
       />
 
       {/* Ambient Background Elements */}
@@ -52,7 +56,10 @@ export default function LockInPage() {
       </div>
 
       {/* Motivational Mantra - Top Section */}
-      <div className="relative z-10 text-center max-w-2xl mx-auto px-4 pt-8 md:pt-10 pb-2 md:pb-3 flex-shrink-0">
+      <div className="relative z-10 text-center max-w-2xl mx-auto px-4 pt-8 md:pt-10 pb-2 md:pb-3 flex-shrink-0 flex flex-col items-center">
+        <div className="mb-6 w-full max-w-md opacity-80 hover:opacity-100 transition-opacity">
+          <FlowGuide currentStep="lock-in" />
+        </div>
         <p className="text-[9px] md:text-[10px] font-mono text-muted-foreground uppercase tracking-widest mb-2">
           Current Mission
         </p>

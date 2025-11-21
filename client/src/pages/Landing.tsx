@@ -1,23 +1,29 @@
 import { Button } from "@/components/ui/button";
-import { Lock, ArrowRight } from "lucide-react";
-import { LockInLogo } from "@/components/LockInLogo";
-import workspaceImg from "@assets/generated_images/developer_focused_at_workstation.png";
+import { ArrowRight, Sparkles, Target, Zap, Headphones } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function Landing() {
   return (
-    <div className="min-h-screen bg-background flex flex-col w-full">
+    <div className="min-h-screen bg-background flex flex-col w-full font-sans text-foreground">
       {/* Header */}
-      <div className="border-b border-border px-6 py-4 bg-card/50 backdrop-blur-sm">
+      <div className="border-b border-border/40 px-6 py-4 bg-background/60 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <LockInLogo variant="compact" className="text-xl" />
+            {/* Logo Integration */}
+            <div className="flex items-center gap-2 font-black text-xl tracking-tighter">
+              <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center text-primary-foreground">
+                <Headphones className="h-5 w-5" />
+              </div>
+              <span>LOCK IN</span>
+            </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button 
-              onClick={() => (window.location.href = "/login")} 
+            <ThemeToggle />
+            <Button
+              onClick={() => (window.location.href = "/login")}
               data-testid="button-login"
-              variant="outline"
-              className="border-primary/50 text-primary hover:bg-primary/10"
+              variant="ghost"
+              className="hover:bg-primary/10 hover:text-primary"
             >
               Sign In
             </Button>
@@ -28,104 +34,85 @@ export default function Landing() {
               }}
               data-testid="button-test-enter"
               size="sm"
-              variant="ghost"
-              className="text-xs"
-              title="Test the app without signing in"
+              className="bg-primary text-white hover:bg-primary/90 shadow-md font-bold"
             >
-              Test
+              Start Demo
             </Button>
           </div>
         </div>
       </div>
 
-      {/* Hero */}
+      {/* Hero Section */}
       <div className="flex-1 flex items-center justify-center px-4 py-20 relative overflow-hidden">
-        {/* Background workspace imagery */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-[0.12]"
-          style={{ backgroundImage: `url(${workspaceImg})` }}
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url('/lofi_mission_control_desk_1763764425522.png')`,
+            filter: "brightness(0.5) blur(0px)"
+          }}
         />
-        
-        {/* Dark gradient overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background/90 via-background/80 to-background/95" />
-        
-        {/* Animated gradient accent */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 animate-gradient" />
-        
-        {/* Grid overlay for tech aesthetic */}
-        <div className="absolute inset-0 opacity-[0.08]" 
-             style={{
-               backgroundImage: 'linear-gradient(rgba(0, 217, 255, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 217, 255, 0.3) 1px, transparent 1px)',
-               backgroundSize: '50px 50px'
-             }} 
-        />
-        
-        <div className="max-w-5xl text-center space-y-12 relative z-10">
-          {/* Logo */}
-          <div className="flex justify-center mb-8">
-            <LockInLogo className="text-6xl" />
-          </div>
-          
-          <div className="space-y-6">
-            <div className="inline-block">
-              <div className="text-xs font-mono font-bold text-primary mb-4 tracking-widest uppercase 
-                            border border-primary/30 px-4 py-2 rounded-md bg-primary/5">
-                Mission Control for High Performers
-              </div>
-            </div>
-            <h2 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none uppercase">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-primary animate-gradient">
-                Lock In.
-              </span>
-              <br />
-              <span className="text-foreground">
-                Ship Relentlessly.
-              </span>
-            </h2>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto font-medium leading-relaxed">
-              Stop wasting time. Start executing. Track every millisecond of focused work and watch your output skyrocket.
-            </p>
+
+        {/* Overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/70 to-background/90 z-10" />
+
+        <div className="max-w-5xl text-center space-y-10 relative z-20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-medium text-sm border border-primary/20 backdrop-blur-sm animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <Sparkles className="h-4 w-4" />
+            <span>Enter the Flow State</span>
           </div>
 
-          {/* CTA */}
-          <div className="flex flex-col gap-4 justify-center items-center -mt-2">
-            <Button 
-              size="lg" 
-              onClick={() => (window.location.href = "/api/login")} 
-              data-testid="button-start-free"
-              className="text-lg px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90 
-                       shadow-lg shadow-primary/50 hover:shadow-xl hover:shadow-primary/60 
-                       transition-all duration-200 font-bold uppercase tracking-wide"
+          <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-none text-foreground drop-shadow-2xl">
+            LOCK <span className="text-primary">IN.</span><br />
+            <span className="text-4xl md:text-6xl font-bold text-muted-foreground tracking-normal">SHIP RELENTLESSLY.</span>
+          </h1>
+
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto font-medium leading-relaxed">
+            Your personal mission control for deep work. Set your intention, block out the noise, and execute.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
+            <Button
+              size="lg"
+              onClick={() => (window.location.href = "/api/login")}
+              className="h-16 px-10 text-xl bg-primary text-white hover:bg-primary/90 shadow-[0_0_30px_rgba(25,149,83,0.4)] hover:shadow-[0_0_40px_rgba(25,149,83,0.6)] transition-all duration-300 rounded-xl font-bold uppercase tracking-wide"
             >
-              <Lock className="h-5 w-5 mr-2" />
-              Ready to lock in?
-              <ArrowRight className="h-5 w-5 ml-2" />
+              Initiate Protocol <ArrowRight className="ml-2 h-6 w-6" />
             </Button>
           </div>
 
-          {/* Social Proof / Stats */}
-          <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-12 pt-16 max-w-4xl border-t border-border/50 w-full px-4">
-            <div className="text-center space-y-2 pt-8 flex-1" data-testid="stat-timer-size">
-              <div className="text-4xl font-mono font-black text-primary" data-testid="text-timer-size">180px</div>
-              <div className="text-xs text-muted-foreground uppercase tracking-wide font-mono">Timer Font Size</div>
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-16 max-w-5xl mx-auto text-left">
+            <div className="bg-card/40 backdrop-blur-md p-6 rounded-2xl border border-border/50 shadow-lg hover:border-primary/50 transition-colors duration-300">
+              <div className="h-12 w-12 rounded-xl bg-primary/20 flex items-center justify-center mb-4 text-primary">
+                <Target className="h-6 w-6" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Set Intention</h3>
+              <p className="text-muted-foreground text-sm">Define a singular, clear goal for your session. No ambiguity.</p>
             </div>
-            <div className="text-center space-y-2 pt-8 flex-1" data-testid="stat-tracking">
-              <div className="text-4xl font-mono font-black text-secondary" data-testid="text-tracking">Real-Time</div>
-              <div className="text-xs text-muted-foreground uppercase tracking-wide font-mono">Millisecond Tracking</div>
+            <div className="bg-card/40 backdrop-blur-md p-6 rounded-2xl border border-border/50 shadow-lg hover:border-primary/50 transition-colors duration-300">
+              <div className="h-12 w-12 rounded-xl bg-secondary/20 flex items-center justify-center mb-4 text-secondary">
+                <Headphones className="h-6 w-6" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Lock In</h3>
+              <p className="text-muted-foreground text-sm">Enter deep work mode with a dedicated timer and environment.</p>
             </div>
-            <div className="text-center space-y-2 pt-8 flex-1" data-testid="stat-pricing">
-              <div className="text-4xl font-mono font-black text-chart-4" data-testid="text-pricing">100%</div>
-              <div className="text-xs text-muted-foreground uppercase tracking-wide font-mono">Free Forever</div>
+            <div className="bg-card/40 backdrop-blur-md p-6 rounded-2xl border border-border/50 shadow-lg hover:border-primary/50 transition-colors duration-300">
+              <div className="h-12 w-12 rounded-xl bg-accent/20 flex items-center justify-center mb-4 text-accent-foreground">
+                <Zap className="h-6 w-6" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Execute</h3>
+              <p className="text-muted-foreground text-sm">Track your output and build a streak of relentless shipping.</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Footer */}
-      <div className="border-t border-border px-6 py-8 bg-card/50 backdrop-blur-sm">
+      <div className="border-t border-border/40 px-6 py-8 bg-background/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-sm text-muted-foreground font-mono">
-            Built for makers, builders, and shippers who refuse to waste time.
+            SYSTEM STATUS: ONLINE // READY TO SHIP
           </p>
         </div>
       </div>

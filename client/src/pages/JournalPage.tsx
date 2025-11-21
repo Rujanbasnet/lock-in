@@ -18,7 +18,7 @@ export default function JournalPage() {
   const [reflection, setReflection] = useState("");
   const [isSaved, setIsSaved] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  
+
   // Fetch today's intention from the database
   const todayDate = new Date().toISOString().split('T')[0];
   const { data: todayIntention, isLoading } = useQuery({
@@ -43,7 +43,7 @@ export default function JournalPage() {
     const promptLine = reflection ? `\n► ${prompt}\n` : `► ${prompt}\n`;
     const newValue = reflection + promptLine;
     setReflection(newValue);
-    
+
     // Focus textarea and position cursor at the end
     setTimeout(() => {
       if (textareaRef.current) {
@@ -65,7 +65,7 @@ export default function JournalPage() {
 
   return (
     <div className="h-full overflow-auto">
-      <PageHeader 
+      <PageHeader
         icon={<BookOpen className="h-6 w-6" />}
         iconColor="text-secondary"
         title="Debrief & Reflect"
@@ -91,25 +91,25 @@ export default function JournalPage() {
                 <Loader2 className="h-4 w-4 animate-spin" />
                 <p className="text-sm">Loading intention...</p>
               </div>
-            ) : todayIntention ? (
+            ) : (
               <>
                 <div>
                   <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
                     Focus Mode
                   </p>
                   <p className="text-sm font-semibold">
-                    {intentionTypeLabels[todayIntention.type] || todayIntention.type}
+                    {todayIntention?.type ? (intentionTypeLabels[todayIntention.type] || todayIntention.type) : "Session"}
                   </p>
                 </div>
                 <div>
                   <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
                     Intention
                   </p>
-                  <p className="text-sm leading-relaxed">"{todayIntention.content}"</p>
+                  <p className="text-sm leading-relaxed">
+                    "{todayIntention?.content || localStorage.getItem("currentIntention") || "No intention set"}"
+                  </p>
                 </div>
               </>
-            ) : (
-              <p className="text-sm text-muted-foreground italic">No intention set yet. Set one on the Intention page to get started.</p>
             )}
           </CardContent>
         </Card>

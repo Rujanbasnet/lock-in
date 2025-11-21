@@ -9,13 +9,14 @@ export default function IntentionPage() {
 
   const handleSaveIntention = (intention: { type: string; content: string }) => {
     console.log("Intention saved:", intention);
+    localStorage.setItem("currentIntention", intention.content);
     // Navigate to lock-in page
     navigate("/lock-in");
   };
 
   return (
     <div className="h-full overflow-auto">
-      <PageHeader 
+      <PageHeader
         icon={<Target className="h-6 w-6" />}
         iconColor="text-primary"
         title="Lock In Your Intention"

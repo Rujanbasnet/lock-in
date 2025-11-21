@@ -77,7 +77,7 @@ export function SessionTimer() {
 
   const handleFinishSession = () => {
     finishSession();
-    navigate("/");
+    navigate("/journal");
   };
 
   // Focus Time (Deep Work + Creative + Flow)
