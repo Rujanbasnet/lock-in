@@ -25,8 +25,8 @@ export default function Login() {
       <div className="absolute top-20 right-1/4 w-72 h-72 bg-primary/10 rounded-full blur-3xl opacity-30" />
       <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl opacity-20" />
 
-      <div className="flex-1 flex flex-col items-center justify-center px-4 relative z-10 max-w-2xl mx-auto w-full">
-        <div className="max-w-md space-y-8">
+      <div className="flex-1 flex flex-col items-center justify-center px-4 relative z-10 w-full">
+        <div className="w-full max-w-md space-y-8">
           {/* Logo Section */}
           <div className="text-center space-y-4">
             <div className="inline-block p-3 rounded-lg bg-primary/10 border border-primary/20">
