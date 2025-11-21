@@ -369,16 +369,17 @@ export function SessionTimer() {
       </div>
 
       {/* End Session Button */}
-      <Button
-        onClick={handleFinishSession}
-        variant="outline"
-        size="sm"
-        className="font-bold"
-        data-testid="button-finish-session"
-      >
-        <CheckCircle className="h-4 w-4 mr-1" />
-        End session
-      </Button>
+      <div className="flex justify-center">
+        <Button
+          onClick={handleFinishSession}
+          size="default"
+          className="min-h-9 font-bold"
+          data-testid="button-finish-session"
+        >
+          <CheckCircle className="h-4 w-4 mr-2" />
+          End session
+        </Button>
+      </div>
 
       {/* Time Breakdown */}
       {Object.values(modeTimers).some(time => time > 0) && (
