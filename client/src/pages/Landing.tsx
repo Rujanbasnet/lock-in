@@ -15,7 +15,7 @@ export default function Landing() {
           </div>
           <div className="flex items-center gap-2">
             <Button 
-              onClick={() => (window.location.href = "/api/login")} 
+              onClick={() => (window.location.href = "/login")} 
               data-testid="button-login"
               variant="outline"
               className="border-primary/50 text-primary hover:bg-primary/10"

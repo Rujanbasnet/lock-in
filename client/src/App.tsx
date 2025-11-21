@@ -16,6 +16,7 @@ import SettingsPage from "@/pages/SettingsPage";
 import PricingPage from "@/pages/PricingPage";
 import LockInPage from "@/pages/LockInPage";
 import Landing from "@/pages/Landing";
+import Login from "@/pages/Login";
 import NotFound from "@/pages/not-found";
 
 function AuthenticatedRouter() {
@@ -98,6 +99,7 @@ function Router() {
     return (
       <Switch>
         <Route path="/" component={Landing} />
+        <Route path="/login" component={Login} />
         <Route component={Landing} />
       </Switch>
     );
