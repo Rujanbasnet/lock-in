@@ -126,16 +126,16 @@ export function SessionTimer() {
   const currentModeData = currentMode ? modes.find((m) => m.id === currentMode) : null;
 
   return (
-    <div className="space-y-6">
-      {/* Main Timer Display */}
+    <div className="space-y-6 w-full">
+      {/* Main Timer Display - Massive and Motivating */}
       <div
-        className={`relative overflow-hidden rounded-2xl border-2 p-12 transition-all ${
+        className={`relative overflow-hidden rounded-2xl border-2 transition-all ${
           currentModeData
-            ? `border-chart-1/50 ${currentModeData.bgGlow}`
+            ? `border-2 ${currentModeData.bgGlow}`
             : "border-border bg-card"
         }`}
       >
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <div className="absolute inset-0 opacity-5 pointer-events-none">
           {currentModeData && (
             <div
               className={`absolute inset-0 bg-gradient-to-br ${currentModeData.color}`}
@@ -143,79 +143,90 @@ export function SessionTimer() {
           )}
         </div>
 
-        <div className="relative text-center space-y-6">
-          <div className="flex items-end justify-center gap-1">
-            <div
-              className="font-mono tabular-nums"
-              style={{
-                fontSize: "120px",
-                fontWeight: "700",
-                lineHeight: "1",
-                letterSpacing: "-0.02em",
-              }}
-              data-testid="text-timer-display"
-            >
-              {String(hours).padStart(2, "0")}:{String(minutes).padStart(2, "0")}:
-              {String(seconds).padStart(2, "0")}
+        <div className="relative p-8 md:p-12 text-center space-y-8">
+          {/* Timer */}
+          <div className="space-y-4">
+            <div className="flex items-end justify-center gap-0 md:gap-1">
+              <div
+                className="font-mono tabular-nums leading-none"
+                style={{
+                  fontSize: "clamp(80px, 20vw, 180px)",
+                  fontWeight: "900",
+                  letterSpacing: "-0.03em",
+                }}
+                data-testid="text-timer-display"
+              >
+                {String(hours).padStart(2, "0")}:{String(minutes).padStart(2, "0")}:
+                {String(seconds).padStart(2, "0")}
+              </div>
+              <div
+                className="font-mono tabular-nums leading-none"
+                style={{
+                  fontSize: "clamp(40px, 10vw, 80px)",
+                  fontWeight: "700",
+                  letterSpacing: "-0.02em",
+                  color: "hsl(var(--muted-foreground))",
+                  marginBottom: "clamp(8px, 3vw, 20px)",
+                }}
+              >
+                .{String(milliseconds).padStart(2, "0")}
+              </div>
             </div>
-            <div
-              className="font-mono tabular-nums pb-4"
-              style={{
-                fontSize: "48px",
-                fontWeight: "700",
-                lineHeight: "1",
-                letterSpacing: "-0.02em",
-                color: "hsl(var(--muted-foreground))",
-              }}
-            >
-              .{String(milliseconds).padStart(2, "0")}
-            </div>
+
+            {/* Current Mode Label */}
+            {currentModeData && (
+              <div className="flex flex-col items-center gap-3">
+                <div className="flex items-center gap-3 justify-center">
+                  <currentModeData.icon
+                    className={`h-8 w-8 ${currentModeData.textColor}`}
+                  />
+                  <span
+                    className={`text-3xl md:text-4xl font-bold ${currentModeData.textColor}`}
+                    data-testid="text-current-mode"
+                  >
+                    {currentModeData.label}
+                  </span>
+                </div>
+                {isRunning && (
+                  <div className="text-sm text-muted-foreground animate-pulse">
+                    ● Session Running
+                  </div>
+                )}
+                {!isRunning && currentMode && (
+                  <div className="text-sm text-muted-foreground">Ready to start</div>
+                )}
+              </div>
+            )}
+
+            {!currentMode && (
+              <div className="text-lg text-muted-foreground">Select a mode to begin</div>
+            )}
           </div>
 
+          {/* Lock In Time Highlight */}
           {currentModeData && (
-            <div className="flex flex-col items-center gap-2">
-              <div className="flex items-center gap-2 justify-center">
-                <currentModeData.icon className={`h-6 w-6 ${currentModeData.textColor}`} />
-                <span
-                  className={`text-2xl font-semibold ${currentModeData.textColor}`}
-                  data-testid="text-current-mode"
-                >
-                  {currentModeData.label}
-                </span>
+            <div className="bg-primary/10 rounded-xl p-6 border border-primary/20">
+              <div className="text-xs font-bold text-primary uppercase tracking-widest mb-2">
+                Lock In Time (Deep Work + Creative)
               </div>
-              {isRunning && (
-                <div className="text-sm text-muted-foreground">
-                  Session in progress
-                </div>
-              )}
+              <div
+                className="font-mono tabular-nums text-4xl md:text-5xl font-bold text-primary"
+                data-testid="text-lock-in-time"
+              >
+                {String(lockInHours).padStart(2, "0")}:{String(lockInMinutes).padStart(2, "0")}:
+                {String(lockInSecsOnly).padStart(2, "0")}
+              </div>
             </div>
           )}
-
-          {/* Lock In Time Display */}
-          <div className="pt-4 border-t border-border/50">
-            <div className="text-sm text-muted-foreground mb-2 uppercase tracking-wide font-semibold">
-              Lock In Time
-            </div>
-            <div
-              className="font-mono tabular-nums text-3xl font-semibold"
-              data-testid="text-lock-in-time"
-            >
-              {String(lockInHours).padStart(2, "0")}:{String(lockInMinutes).padStart(2, "0")}:
-              {String(lockInSecsOnly).padStart(2, "0")}
-            </div>
-            <p className="text-xs text-muted-foreground mt-2">
-              Deep Work + Creative (excludes Rest & Social)
-            </p>
-          </div>
         </div>
       </div>
 
-      {/* Mode Selection */}
+      {/* Mode Selection Grid */}
       <div>
-        <h3 className="text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide">
-          Lock In Mode
-        </h3>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4 block">
+          Switch Mode (Anytime)
+        </label>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {modes.map((mode) => {
             const Icon = mode.icon;
             const isActive = currentMode === mode.id;
@@ -231,14 +242,14 @@ export function SessionTimer() {
                 disabled={isRunning && !isActive}
                 data-testid={`button-mode-${mode.id}`}
                 className={`
-                  relative overflow-hidden rounded-xl border p-4 transition-all
+                  relative overflow-hidden rounded-lg border transition-all p-4
                   hover-elevate active-elevate-2
                   ${
                     isActive
-                      ? `border-2 border-current ${mode.bgGlow} ring-2 ring-offset-2 ring-offset-background ring-current`
+                      ? `border-2 border-current ${mode.bgGlow} ring-2 ring-offset-2 ring-offset-background ring-current shadow-lg`
                       : isRunning
-                        ? "opacity-50 cursor-not-allowed"
-                        : "border-border bg-card"
+                        ? "opacity-40 cursor-not-allowed border-border"
+                        : "border-border hover:border-border/50"
                   }
                 `}
               >
@@ -249,13 +260,13 @@ export function SessionTimer() {
                     }`}
                   />
                   <span
-                    className={`text-sm font-semibold ${
+                    className={`text-sm font-bold transition-colors ${
                       isActive ? mode.textColor : "text-foreground"
                     }`}
                   >
                     {mode.label}
                   </span>
-                  <span className="text-xs text-muted-foreground mt-1">
+                  <span className="text-xs text-muted-foreground font-mono mt-1">
                     {String(modeHours).padStart(2, "0")}:{String(modeMinutes).padStart(2, "0")}:
                     {String(modeSecsOnly).padStart(2, "0")}
                   </span>
@@ -266,24 +277,24 @@ export function SessionTimer() {
         </div>
       </div>
 
-      {/* Controls */}
+      {/* Control Buttons */}
       <div className="flex gap-3 flex-wrap">
         <Button
           onClick={handleStart}
           disabled={!currentMode}
           size="lg"
-          className="flex-1"
+          className="flex-1 min-h-14 text-lg font-bold"
           data-testid="button-start-timer"
         >
           {isRunning ? (
             <>
-              <Pause className="h-5 w-5 mr-2" />
+              <Pause className="h-6 w-6 mr-2" />
               Pause
             </>
           ) : (
             <>
-              <Play className="h-5 w-5 mr-2" />
-              Start Session
+              <Play className="h-6 w-6 mr-2" />
+              Start
             </>
           )}
         </Button>
@@ -291,35 +302,24 @@ export function SessionTimer() {
           onClick={handleReset}
           variant="outline"
           size="lg"
+          className="min-h-14"
           data-testid="button-reset-timer"
         >
-          <RotateCcw className="h-5 w-5 mr-2" />
-          Reset
+          <RotateCcw className="h-6 w-6" />
         </Button>
       </div>
 
-      {/* Mode Breakdown */}
+      {/* Time Breakdown */}
       {(modeTimers["deep-work"] > 0 ||
         modeTimers.creative > 0 ||
         modeTimers.social > 0 ||
         modeTimers.rest > 0) && (
         <Card>
           <CardContent className="pt-6">
-            <h3 className="text-sm font-semibold text-muted-foreground mb-4 uppercase tracking-wide">
-              Time Breakdown
+            <h3 className="text-xs font-bold text-muted-foreground mb-4 uppercase tracking-widest">
+              Session Breakdown
             </h3>
             <div className="space-y-3">
-              {/* Core Work Time */}
-              <div className="bg-primary/5 rounded-lg p-4 mb-4">
-                <div className="text-xs font-semibold text-primary mb-2 uppercase tracking-wide">
-                  Total Lock In Time
-                </div>
-                <div className="font-mono text-2xl font-semibold">
-                  {String(lockInHours).padStart(2, "0")}:{String(lockInMinutes).padStart(2, "0")}:
-                  {String(lockInSecsOnly).padStart(2, "0")}
-                </div>
-              </div>
-
               {/* Individual Mode Times */}
               <div className="grid grid-cols-2 gap-3">
                 {modes.map((mode) => {
@@ -333,30 +333,20 @@ export function SessionTimer() {
                   return (
                     <div
                       key={mode.id}
-                      className="flex items-center justify-between text-sm p-3 rounded-lg bg-muted/30"
+                      className="flex items-center justify-between text-sm p-3 rounded-lg bg-muted/40 border border-border/50"
                       data-testid={`timer-${mode.id}`}
                     >
                       <div className="flex items-center gap-2">
                         <mode.icon className={`h-4 w-4 ${mode.textColor}`} />
-                        <span>{mode.label}</span>
+                        <span className="font-medium">{mode.label}</span>
                       </div>
-                      <span className="font-mono font-semibold">
+                      <span className="font-mono font-bold text-foreground">
                         {String(modeHours).padStart(2, "0")}:{String(modeMinutes).padStart(2, "0")}:
                         {String(modeSecsOnly).padStart(2, "0")}
                       </span>
                     </div>
                   );
                 })}
-              </div>
-
-              {/* Legend */}
-              <div className="text-xs text-muted-foreground pt-2 border-t border-border/50">
-                <p className="mb-2">
-                  <strong>Lock In Time:</strong> Deep Work + Creative
-                </p>
-                <p>
-                  <strong>Other Timers:</strong> Social & Rest tracked separately
-                </p>
               </div>
             </div>
           </CardContent>

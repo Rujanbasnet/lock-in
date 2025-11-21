@@ -6,11 +6,19 @@ import { useState } from "react";
 
 export default function JournalPage() {
   const [reflection, setReflection] = useState("");
+  const [isSaved, setIsSaved] = useState(false);
   
   // Mock intention from earlier (in real app, would come from state management)
   const todayIntention = {
     type: "deep-work",
     content: "Get the user authentication feature into production",
+  };
+
+  const handleSaveReflection = () => {
+    console.log("Reflection saved:", reflection);
+    setIsSaved(true);
+    setTimeout(() => setIsSaved(false), 3000);
+    setReflection("");
   };
 
   const intentionTypeLabels: Record<string, string> = {
@@ -113,13 +121,10 @@ export default function JournalPage() {
             {/* Save */}
             <div className="flex items-center justify-between">
               <p className="text-xs text-muted-foreground">
-                {reflection ? "Ready to save your reflection" : "Start typing to reflect"}
+                {isSaved ? "✓ Reflection saved" : reflection ? "Ready to save" : "Start typing to reflect"}
               </p>
               <Button
-                onClick={() => {
-                  console.log("Reflection saved:", reflection);
-                  setReflection("");
-                }}
+                onClick={handleSaveReflection}
                 disabled={!reflection.trim()}
                 data-testid="button-save-reflection"
               >
