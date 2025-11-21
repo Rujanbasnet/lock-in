@@ -1,183 +1,165 @@
-# Digital Wellness Dashboard - Design Guidelines
+# LOCK IN - Design Guidelines
 
-## Design Approach
+## Design Philosophy
+Sharp, modern, high-performance aesthetic for intense workers building the future. Mission-control meets performance dashboard. Every pixel reinforces grit, urgency, and forward momentum.
 
-**Reference-Based Approach**: Drawing inspiration from Calm, Headspace (wellness aesthetics), Notion (flexible dashboards), and Linear (clean data presentation). Focus on creating a tranquil, focused experience that reduces cognitive load while remaining feature-rich and engaging.
+## Brand Voice
+Ruthless. Focused. Relentless. No fluff, no distractions. Lock in and ship.
 
-**Core Principle**: Design should embody the app's purpose - every interaction should feel intentional, calm, and supportive of mindful technology use.
+## Color Palette
 
----
+### Core Colors
+- **Background (Dark)**: Deep charcoal `#0A0A0F` - Primary background
+- **Background (Light)**: Dark slate `#16161D` - Elevated surfaces
+- **Foreground**: Crisp white `#FAFAFA` - Primary text
 
-## Typography System
+### Accent Colors (Electric, Saturated)
+- **Primary (Cyan)**: `#00D9FF` - Lock In actions, timers, focus states
+- **Secondary (Magenta)**: `#FF00D9` - Creative mode, achievements
+- **Warning (Amber)**: `#FFB800` - Alerts, deadlines, intensity indicators
+- **Success (Green)**: `#00FF88` - Completion, streaks
 
-**Font Families**:
-- Primary: Inter (UI elements, body text, data labels)
-- Accent: Fraunces or Crimson Pro (section headers, daily intentions, journal entries)
+### Semantic Colors
+- **Deep Work**: Electric cyan `#00D9FF`
+- **Creative**: Neon magenta `#FF00D9`
+- **Social**: Warm amber `#FFB800`
+- **Rest**: Cool purple `#8B5CF6`
 
-**Hierarchy**:
-- Hero/Main Headlines: text-4xl to text-6xl, font-medium
-- Section Headers: text-2xl to text-3xl, font-medium  
-- Card Titles: text-lg, font-semibold
-- Body Text: text-base, font-normal, leading-relaxed
-- Data Labels/Metrics: text-sm, font-medium, tracking-wide uppercase
-- Micro-copy: text-xs, font-normal
+### UI States
+- **Muted/Secondary Text**: `#94A3B8`
+- **Border**: `#1E293B`
+- **Border Hover**: `#334155`
+- **Card Background**: `#16161D`
 
----
+## Typography
 
-## Layout System
+### Display (Headlines)
+- **Font**: System condensed sans-serif stack
+- **Weight**: Bold (700) or ExtraBold (800)
+- **Style**: Uppercase for major headings
+- **Letter Spacing**: Tight (-0.02em)
 
-**Spacing Primitives**: Use Tailwind units of 3, 4, 6, 8, 12, 16, 20 for consistent rhythm (p-4, m-6, gap-8, etc.)
+### Data/Metrics
+- **Font**: Monospace (JetBrains Mono, SF Mono, Consolas)
+- **Weight**: Medium (500) or SemiBold (600)
+- **Use for**: Timers, stats, Lock In Time
 
-**Dashboard Structure**:
-- Sidebar navigation (fixed, w-64)
-- Main content area (max-w-7xl, px-8, py-12)
-- Two-column layout for dashboard view (2/3 main content, 1/3 sidebar widgets)
-- Single column for journal and intention setting (max-w-3xl centered)
+### Body
+- **Font**: System grotesk/sans-serif (Inter, SF Pro, system-ui)
+- **Weight**: Regular (400) for body, Medium (500) for emphasis
+- **Line height**: 1.5 for readability
 
-**Card System**:
-- Rounded corners: rounded-xl to rounded-2xl
-- Padding: p-6 to p-8
-- Spacing between cards: gap-6
-- Elevated cards for interactive elements, flat for informational
+## Logo Design
 
----
+### Primary Wordmark
+```
+LOCK
+──/──
+ IN
+```
+- Stacked LOCK above IN
+- Forward-leaning diagonal slash through the O (/)
+- Bold, condensed sans-serif
+- Electric cyan for slash accent
 
-## Component Library
+### Badge Variant (Compact)
+```
+∥L // IN
+```
+- Use in navbar, favicon, small spaces
+- Parallel bars (∥) + forward slashes (//)
+- Monochrome or with cyan accent
 
-### Navigation
-- Fixed sidebar with app logo, main sections (Dashboard, Intention, Activity Log, Journal, Settings)
-- Icon + label format for clarity
-- Active state indicator (border accent or background treatment)
-- Avatar/user section at bottom with wellness streak counter
+## UI Patterns
 
-### Dashboard Widgets
+### Mission Control Dashboard
+- Quadrant layout (Intention, Timer, Output, Debrief)
+- High contrast cards with subtle borders
+- Data-dense, information-rich
+- Real-time indicators and status chips
 
-**Daily Intention Card** (prominent placement):
-- Large, centered card with generous padding (p-10)
-- Four intention options as pill buttons or rounded rectangles
-- Selected state clearly differentiated
-- Motivational micro-copy below selections
+### Full-Bleed Timer Wall
+- Timer fills viewport (180px+ font size)
+- Animated progress beams framing edges
+- Keyboard-accessible controls
+- Mode indicators in corners
 
-**Activity Timeline**:
-- Horizontal timeline visualization showing today's digital sessions
-- Time blocks as colored segments (different apps/activities)
-- Hover tooltips with details
-- Total duration displayed prominently
+### Motivation Elements
+- **Hero Typography**: Large, bold proclamations ("Lock In. Ship Relentlessly.")
+- **Contextual Mantras**: Dynamic motivational text based on session state
+- **Intensity Meter**: Visual indicator of focus depth
+- **Streak Heatmap**: Calendar-style achievement tracking
+- **Achievement Chips**: Small badges for milestones
 
-**Weekly Overview**:
-- Bar chart or area chart showing 7-day pattern
-- Gentle grid lines, no harsh borders
-- Data labels positioned clearly
-- Comparison to previous week (small metric)
+### Interaction States
+- **Hover**: Subtle glow effect (box-shadow with accent color)
+- **Active**: Slight scale down (0.98) + stronger glow
+- **Focus**: 2px solid accent border
+- **Disabled**: 40% opacity, no interaction
 
-**Break Reminder Widget**:
-- Compact card with next break countdown
-- "Start Breathing Exercise" button
-- Settings icon for customization
+## Animation Principles
+- **Speed**: Fast (150-250ms) for micro-interactions
+- **Easing**: cubic-bezier(0.4, 0, 0.2, 1) for smooth, professional feel
+- **Purpose**: Every animation reinforces action or feedback
+- **Kinetic Gradients**: Subtle animated gradients on hero sections
 
-### Activity Logger
-- Quick-add form with autocomplete app/activity field
-- Duration input (hrs/mins dropdowns or single input)
-- Category tags (Work, Social, Entertainment, Learning)
-- Recent activities list below for easy re-logging
+## Component Specifications
 
-### Breathing Exercise Modal
-- Full-screen overlay with gentle backdrop blur
-- Circular breathing animation (expand/contract rhythm)
-- Simple instructions: "Breathe in... Hold... Breathe out..."
-- Exit option in corner
-- Progress indicator (3/5 cycles complete)
+### Cards
+- Background: `#16161D`
+- Border: 1px solid `#1E293B`
+- Border radius: 8px (sharp, not too rounded)
+- Padding: 24px
+- Hover: Border `#334155`, subtle box-shadow with accent glow
 
-### Journal Interface
-- Clean writing area (max-w-2xl)
-- Date picker for viewing past entries
-- Prompt suggestions ("How did technology serve you today?", "What would you change tomorrow?")
-- Auto-save indicator
-- Entry list sidebar with preview snippets
+### Buttons
+- **Primary**: Electric cyan background, white text, bold
+- **Secondary**: Transparent with cyan border, cyan text
+- **Danger**: Amber background for destructive actions
+- **Ghost**: No background, hover shows subtle background
 
-### Data Visualization
-- Circular progress rings for daily goals
-- Trend lines with smooth curves, no sharp angles
-- Minimal gridlines and axes
-- Focus on data, reduce chart junk
-- Tooltips on hover for detailed information
+### Progress Bars
+- Height: 4px minimum
+- Background: `#1E293B`
+- Fill: Gradient from cyan to magenta
+- Animated striped pattern for active states
 
----
+### Badges/Chips
+- Small (20-24px height)
+- Rounded-full or rounded-md
+- Colored backgrounds (20% opacity) with matching text
+- Bold, uppercase, tight letter-spacing
 
-## Images
+## Design Principles
 
-**Hero Section (Dashboard Landing)**:
-- Soft, abstract illustration of person in peaceful digital space (meditation pose with floating device icons, watercolor style)
-- Position: Full-width background with content overlay
-- Treatment: Subtle opacity or gradient overlay for text readability
+### DO
+✓ Use high contrast
+✓ Keep interactions tight and responsive
+✓ Show real-time data prominently
+✓ Create visual hierarchy through size and color
+✓ Use monospace for all numbers/metrics
+✓ Maintain sharp, angular aesthetic
+✓ Reinforce urgency and momentum
 
-**Empty States**:
-- Gentle illustrations for:
-  - First-time intention setting (sun rising, new day beginning)
-  - No activities logged yet (peaceful scene, invitation to start)
-  - Empty journal (open book, pen ready)
-- Style: Line art or soft illustrations, not photographic
+### DON'T
+✗ Use soft pastel colors
+✗ Overuse rounded corners (rounded-pill everywhere)
+✗ Add playful illustrations or cartoons
+✗ Include gamified gimmicks
+✗ Create cluttered layouts
+✗ Use gentle, friendly copy
+✗ Dilute the high-performance tone
 
-**Breathing Exercise**:
-- Optional ambient nature imagery (sky, water, forest canopy) as subtle background
-- Should enhance calm, not distract
+## Accessibility
+- Maintain WCAG AA contrast ratios (4.5:1 minimum for text)
+- Provide clear focus indicators
+- Support keyboard navigation
+- Use semantic HTML
+- Provide alternative text for graphics
 
----
-
-## Interaction Patterns
-
-**Micro-interactions**:
-- Gentle scale on button press (scale-95)
-- Smooth transitions for all state changes (transition-all duration-200)
-- Progress bars fill with ease-in-out animation
-- Cards lift slightly on hover (elevated interactive elements only)
-
-**Breathing Exercise Animation**:
-- Smooth circular scale animation (3-4 second inhale, hold, exhale cycle)
-- Synchronized text fade transitions
-- Gentle completion celebration (subtle success indicator, not jarring)
-
-**Data Updates**:
-- Fade-in new entries
-- Chart animations on load (stagger effect, animate from zero)
-- Counter animations for metrics (count up effect)
-
----
-
-## Accessibility & Mindful Design
-
-- Generous touch targets (min h-12 for buttons)
-- Clear focus indicators for keyboard navigation
-- Reduced motion option respected
-- High contrast text on all backgrounds
-- Breathing exercise includes audio option toggle
-- Distraction-free reading mode for journal
-
----
-
-## Page-Specific Layouts
-
-**Dashboard**: 
-- Two-column grid (lg:grid-cols-3)
-- Daily Intention spans full width at top
-- Activity Timeline and Weekly Overview in main column
-- Break Reminder and Quick Stats in sidebar column
-
-**Intention Setting**:
-- Single centered card (max-w-2xl)
-- Four large selection cards in 2x2 grid
-- Confirmation view with selected intention displayed beautifully
-
-**Activity Log**:
-- Split view: Input form (1/3) + Timeline list (2/3)
-- Chronological entries with edit/delete actions
-- Filter by date range and category
-
-**Journal**:
-- Minimal interface, max-w-3xl centered
-- Entry selector sidebar (collapsible on mobile)
-- Large text area with comfortable line height (leading-loose)
-
----
-
-This design creates a sanctuary for digital wellness - calming yet functional, beautiful yet purposeful. Every element supports the user's journey toward healthier technology habits.
+## Responsive Design
+- Mobile-first approach
+- Breakpoints: 640px (sm), 768px (md), 1024px (lg), 1280px (xl)
+- Stack cards vertically on mobile
+- Maintain readability at all sizes
+- Timer remains prominent on all devices
