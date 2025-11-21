@@ -4,7 +4,7 @@ import { Lock, ArrowRight, Code2, Zap, Target } from "lucide-react";
 
 export default function Login() {
   return (
-    <div className="min-h-screen bg-background flex flex-col overflow-hidden relative">
+    <div className="min-h-screen bg-background flex flex-col overflow-hidden relative w-full">
       {/* Animated grid background */}
       <div className="absolute inset-0 opacity-[0.05]" 
            style={{

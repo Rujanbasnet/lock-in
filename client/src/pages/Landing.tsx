@@ -5,7 +5,7 @@ import workspaceImg from "@assets/generated_images/developer_focused_at_workstat
 
 export default function Landing() {
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col w-full">
       {/* Header */}
       <div className="border-b border-border px-6 py-4 bg-card/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
