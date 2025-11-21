@@ -86,7 +86,7 @@ export default function Landing() {
           </div>
 
           {/* CTA */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
+          <div className="flex flex-col gap-4 justify-center items-center pt-8">
             <Button 
               size="lg" 
               onClick={() => (window.location.href = "/api/login")} 
@@ -96,12 +96,9 @@ export default function Landing() {
                        transition-all duration-200 font-bold uppercase tracking-wide"
             >
               <Lock className="h-5 w-5 mr-2" />
-              Start 7-Day Trial
+              Ready to lock in?
               <ArrowRight className="h-5 w-5 ml-2" />
             </Button>
-            <div className="text-sm text-muted-foreground font-mono">
-              Then <span className="text-primary font-bold">$5/month</span> to stay locked in
-            </div>
           </div>
 
           {/* Features Grid */}
@@ -162,18 +159,18 @@ export default function Landing() {
           </div>
 
           {/* Social Proof / Stats */}
-          <div className="grid grid-cols-3 gap-8 pt-16 max-w-2xl mx-auto border-t border-border/50">
-            <div className="text-center space-y-2 pt-8" data-testid="stat-timer-size">
+          <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-12 pt-16 max-w-4xl mx-auto border-t border-border/50 px-4">
+            <div className="text-center space-y-2 pt-8 flex-1" data-testid="stat-timer-size">
               <div className="text-4xl font-mono font-black text-primary" data-testid="text-timer-size">180px</div>
               <div className="text-xs text-muted-foreground uppercase tracking-wide font-mono">Timer Font Size</div>
             </div>
-            <div className="text-center space-y-2 pt-8" data-testid="stat-tracking">
+            <div className="text-center space-y-2 pt-8 flex-1" data-testid="stat-tracking">
               <div className="text-4xl font-mono font-black text-secondary" data-testid="text-tracking">Real-Time</div>
               <div className="text-xs text-muted-foreground uppercase tracking-wide font-mono">Millisecond Tracking</div>
             </div>
-            <div className="text-center space-y-2 pt-8" data-testid="stat-pricing">
-              <div className="text-4xl font-mono font-black text-chart-4" data-testid="text-pricing">$5/mo</div>
-              <div className="text-xs text-muted-foreground uppercase tracking-wide font-mono">After Trial</div>
+            <div className="text-center space-y-2 pt-8 flex-1" data-testid="stat-pricing">
+              <div className="text-4xl font-mono font-black text-chart-4" data-testid="text-pricing">100%</div>
+              <div className="text-xs text-muted-foreground uppercase tracking-wide font-mono">Free Forever</div>
             </div>
           </div>
         </div>
