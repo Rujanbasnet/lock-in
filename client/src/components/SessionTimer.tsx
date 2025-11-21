@@ -1,7 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Brain, Palette, Zap, Users, Moon, Coffee, Play, Pause, RotateCcw } from "lucide-react";
+import { Brain, Palette, Zap, Users, Moon, Coffee, Play, Pause, RotateCcw, CheckCircle } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
 
 const modes = [
   {
@@ -61,6 +62,7 @@ const modes = [
 ];
 
 export function SessionTimer() {
+  const [, navigate] = useLocation();
   const [isRunning, setIsRunning] = useState(false);
   const [totalMilliseconds, setTotalMilliseconds] = useState(0);
   const [modeTimers, setModeTimers] = useState<Record<string, number>>({
@@ -76,6 +78,10 @@ export function SessionTimer() {
     Array<{ mode: string; duration: number; startedAt: number }>
   >([]);
   const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
+
+  const handleFinishSession = () => {
+    navigate("/journal");
+  };
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -361,6 +367,18 @@ export function SessionTimer() {
           <RotateCcw className="h-6 w-6" />
         </Button>
       </div>
+
+      {/* Finish Session Button */}
+      <Button
+        onClick={handleFinishSession}
+        variant="default"
+        size="lg"
+        className="w-full min-h-12 text-base font-bold"
+        data-testid="button-finish-session"
+      >
+        <CheckCircle className="h-5 w-5 mr-2" />
+        Finish Session & Reflect
+      </Button>
 
       {/* Time Breakdown */}
       {Object.values(modeTimers).some(time => time > 0) && (
