@@ -12,6 +12,7 @@ import Dashboard from "@/pages/Dashboard";
 import IntentionPage from "@/pages/IntentionPage";
 import ActivitiesPage from "@/pages/ActivitiesPage";
 import JournalPage from "@/pages/JournalPage";
+import JournalHistoryPage from "@/pages/JournalHistoryPage";
 import SettingsPage from "@/pages/SettingsPage";
 import PricingPage from "@/pages/PricingPage";
 import LockInPage from "@/pages/LockInPage";
@@ -29,6 +30,7 @@ function AuthenticatedRouter() {
       <Route path="/intention" component={IntentionPage} />
       <Route path="/activities" component={ActivitiesPage} />
       <Route path="/journal" component={JournalPage} />
+      <Route path="/journal/history" component={JournalHistoryPage} />
       <Route path="/pricing" component={PricingPage} />
       <Route path="/settings" component={SettingsPage} />
       <Route component={NotFound} />
@@ -37,47 +39,12 @@ function AuthenticatedRouter() {
 }
 
 function AuthenticatedContent() {
-  const { state, toggleSidebar } = useSidebar();
-  const isCollapsed = state === "collapsed";
-  const [isLocked, setIsLocked] = useState(false);
-  const sidebarRef = useRef<HTMLDivElement>(null);
-  const mainRef = useRef<HTMLDivElement>(null);
-
-  const handleMainClick = () => {
-    if (!isLocked && !isCollapsed) {
-      toggleSidebar();
-      setIsLocked(false);
-    }
-  };
-
-  const handleSidebarClick = () => {
-    setIsLocked(true);
-  };
-
-  const handleSidebarMouseLeave = () => {
-    if (!isLocked && !isCollapsed) {
-      toggleSidebar();
-    }
-  };
-
   return (
     <>
-      <div
-        ref={sidebarRef}
-        onClick={handleSidebarClick}
-        onMouseLeave={handleSidebarMouseLeave}
-      >
+      <div className="h-full">
         <AppSidebar />
       </div>
-      {isCollapsed && (
-        <SidebarTrigger
-          data-testid="button-sidebar-expand"
-          className="fixed left-0 top-0 z-40 w-16 h-screen transition-all duration-200 opacity-0 hover:opacity-100 bg-primary/10 hover:bg-primary/20 flex items-center justify-center group cursor-pointer"
-        >
-          <span className="text-xs font-bold text-primary opacity-0 group-hover:opacity-100">{'>'}</span>
-        </SidebarTrigger>
-      )}
-      <div className="flex flex-col flex-1 min-w-0 w-full" ref={mainRef} onClick={handleMainClick}>
+      <div className="flex flex-col flex-1 min-w-0 w-full">
         <main className="flex-1 w-full h-full overflow-auto">
           <AuthenticatedRouter />
         </main>

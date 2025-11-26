@@ -5,35 +5,24 @@ import { Lock, ArrowRight, Code2, Zap, Target } from "lucide-react";
 export default function Login() {
   return (
     <div className="min-h-screen bg-background flex flex-col overflow-hidden relative w-full">
-      {/* Animated grid background */}
-      <div className="absolute inset-0 opacity-[0.05]" 
-           style={{
-             backgroundImage: 'linear-gradient(rgba(0, 217, 255, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 217, 255, 0.5) 1px, transparent 1px)',
-             backgroundSize: '60px 60px'
-           }} 
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-center"
+        style={{
+          backgroundImage: `url('/lofi_mission_control_desk_1763764425522.png')`,
+          filter: "brightness(0.5) blur(0px)"
+        }}
       />
-      
-      {/* Scanline effect */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none" 
-           style={{
-             backgroundImage: 'repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 2px)',
-             backgroundSize: '100% 2px'
-           }} 
-      />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/70 to-background/90 z-10" />
 
-      {/* Glow accents */}
-      <div className="absolute top-20 right-1/4 w-72 h-72 bg-primary/10 rounded-full blur-3xl opacity-30" />
-      <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl opacity-20" />
-
-      <div className="flex-1 flex flex-col items-center justify-center px-4 relative z-10 w-full">
+      <div className="flex-1 flex flex-col items-center justify-center px-4 relative z-20 w-full">
         <div className="w-full max-w-md space-y-8">
           {/* Logo Section */}
-          <div className="text-center space-y-4">
-            <div className="inline-block p-3 rounded-lg bg-primary/10 border border-primary/20">
-              <LockInLogo variant="compact" className="text-4xl" />
-            </div>
+          <div className="text-center space-y-4 flex flex-col items-center">
+            <LockInLogo className="scale-150 mb-4" />
             <div className="space-y-2">
-              <h1 className="text-4xl md:text-5xl font-black tracking-tighter uppercase">
+              <h1 className="text-4xl md:text-5xl font-black tracking-tighter uppercase hidden">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-primary">
                   Lock In
                 </span>
@@ -86,7 +75,10 @@ export default function Login() {
             <div className="space-y-4">
               <h3 className="text-sm font-bold uppercase tracking-tight">Try Demo First</h3>
               <Button
-                onClick={() => (window.location.href = "/")}
+                onClick={() => {
+                  localStorage.setItem("testMode", "true");
+                  window.location.href = "/";
+                }}
                 variant="outline"
                 size="lg"
                 className="w-full text-base font-bold uppercase tracking-wide border-primary/50"

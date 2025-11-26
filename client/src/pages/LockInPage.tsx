@@ -1,9 +1,10 @@
 import { SessionTimer } from "@/components/SessionTimer";
 import { Badge } from "@/components/ui/badge";
-import { Lock, Zap } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Headphones, Target, Zap, Activity } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-
 import { FlowGuide } from "@/components/FlowGuide";
+import heroImg from "@assets/lock_in_hero.png";
 
 export default function LockInPage() {
   const today = new Date().toISOString().split('T')[0];
@@ -17,108 +18,121 @@ export default function LockInPage() {
     "Create it, Build it, Ship it";
 
   return (
-    <div className="h-full w-full overflow-auto relative flex flex-col bg-background/50">
-      {/* Subtle background workspace imagery */}
+    <div className="h-full w-full overflow-auto relative flex flex-col bg-background">
+      {/* Background */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-[0.05] pointer-events-none"
-        style={{ backgroundImage: `url('/focus_discipline_abstract_1763764445869.png')` }}
+        className="absolute inset-0 bg-cover bg-center opacity-10 pointer-events-none"
+        style={{ backgroundImage: `url(${heroImg})` }}
       />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
 
-      {/* Ambient Background Elements */}
+      {/* Ambient glow effects */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[100px] animate-pulse-glow" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-secondary/5 blur-[100px] animate-pulse-glow" style={{ animationDelay: "2s" }} />
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px] animate-pulse-glow" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-orange-500/5 blur-[120px] animate-pulse-glow" style={{ animationDelay: "2s" }} />
       </div>
 
-      {/* Animated Progress Beams - Top and Bottom */}
-      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent 
-                    animate-pulse opacity-60 z-20" />
-
-      {/* Animated Progress Beams - Left and Right */}
-      <div className="absolute top-0 left-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-primary to-transparent 
-                    animate-pulse opacity-60 z-20" />
-      <div className="absolute top-0 right-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-secondary to-transparent 
-                    animate-pulse opacity-60 z-20" />
-
-      {/* Status Indicators - Corners */}
-      <div className="absolute top-3 left-3 z-30">
-        <Badge variant="outline" className="border-primary/50 text-primary font-mono text-[10px] uppercase tracking-wider" data-testid="badge-session-active">
-          <Lock className="h-2 w-2 mr-1 animate-pulse" />
-          Active
+      {/* Status Badges - Top Corners */}
+      <div className="absolute top-4 left-4 z-30">
+        <Badge variant="outline" className="border-primary/40 bg-primary/10 text-primary font-mono text-xs uppercase tracking-wider backdrop-blur-sm" data-testid="badge-session-active">
+          <div className="h-2 w-2 rounded-full bg-primary animate-pulse mr-2" />
+          Session Active
         </Badge>
       </div>
 
-      <div className="absolute top-3 right-3 z-30">
-        <Badge variant="outline" className="border-chart-4/50 text-chart-4 font-mono text-[10px] uppercase tracking-wider" data-testid="badge-mode-deep-work">
-          <Zap className="h-2 w-2 mr-1" />
-          Deep Work
+      <div className="absolute top-4 right-4 z-30">
+        <Badge variant="outline" className="border-orange-500/40 bg-orange-500/10 text-orange-500 font-mono text-xs uppercase tracking-wider backdrop-blur-sm" data-testid="badge-mode-deep-work">
+          <Headphones className="h-3 w-3 mr-2" />
+          Deep Work Mode
         </Badge>
       </div>
 
-      {/* Motivational Mantra - Top Section */}
-      <div className="relative z-10 text-center max-w-2xl mx-auto px-4 pt-8 md:pt-10 pb-2 md:pb-3 flex-shrink-0 flex flex-col items-center">
-        <div className="mb-6 w-full max-w-md opacity-80 hover:opacity-100 transition-opacity">
+      {/* Main Content */}
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 py-8">
+
+        {/* Flow Guide */}
+        <div className="mb-8 w-full max-w-md opacity-90">
           <FlowGuide currentStep="lock-in" />
         </div>
-        <p className="text-[9px] md:text-[10px] font-mono text-muted-foreground uppercase tracking-widest mb-2">
-          Current Mission
-        </p>
-        <h1 className="text-sm md:text-lg lg:text-xl font-black tracking-tight leading-tight" data-testid="text-current-intention">
-          {userIntention}
-        </h1>
-      </div>
 
-      <main className="flex-1 max-w-5xl mx-auto w-full p-6 flex flex-col items-center justify-center relative z-10">
-        <div className="w-full max-w-3xl space-y-8">
+        {/* Current Intention Display */}
+        <Card className="max-w-2xl w-full mb-12 bg-gradient-to-br from-primary/5 to-orange-500/5 border-primary/20 backdrop-blur-sm shadow-xl">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <Target className="h-5 w-5 text-primary" />
+              </div>
+              <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
+                Current Mission
+              </span>
+            </div>
+            <h1 className="text-xl md:text-2xl font-black tracking-tight leading-tight" data-testid="text-current-intention">
+              {userIntention}
+            </h1>
+          </CardContent>
+        </Card>
+
+        {/* Timer Section */}
+        <div className="w-full max-w-4xl space-y-8">
+
           {/* Status Indicator */}
           <div className="flex justify-center">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-card/40 border border-primary/20 backdrop-blur-md shadow-[0_0_15px_rgba(0,217,255,0.1)]">
-              <div className="h-2 w-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_#00d9ff]" />
-              <span className="text-xs font-mono font-bold text-primary tracking-widest uppercase">
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-card/60 border border-primary/20 backdrop-blur-md shadow-lg">
+              <div className="h-3 w-3 rounded-full bg-primary animate-pulse shadow-[0_0_12px_var(--primary)]" />
+              <span className="text-sm font-mono font-bold text-primary tracking-widest uppercase">
                 System Ready
               </span>
             </div>
           </div>
 
-          {/* Main Timer Component */}
+          {/* Main Timer Component with decorative frame */}
           <div className="relative">
-            {/* Decorative corners */}
-            <div className="absolute -top-4 -left-4 w-8 h-8 border-t-2 border-l-2 border-primary/30 rounded-tl-lg" />
-            <div className="absolute -top-4 -right-4 w-8 h-8 border-t-2 border-r-2 border-primary/30 rounded-tr-lg" />
-            <div className="absolute -bottom-4 -left-4 w-8 h-8 border-b-2 border-l-2 border-primary/30 rounded-bl-lg" />
-            <div className="absolute -bottom-4 -right-4 w-8 h-8 border-b-2 border-r-2 border-primary/30 rounded-br-lg" />
+            {/* Corner decorations */}
+            <div className="absolute -top-6 -left-6 w-12 h-12 border-t-2 border-l-2 border-primary/20 rounded-tl-xl" />
+            <div className="absolute -top-6 -right-6 w-12 h-12 border-t-2 border-r-2 border-primary/20 rounded-tr-xl" />
+            <div className="absolute -bottom-6 -left-6 w-12 h-12 border-b-2 border-l-2 border-primary/20 rounded-bl-xl" />
+            <div className="absolute -bottom-6 -right-6 w-12 h-12 border-b-2 border-r-2 border-primary/20 rounded-br-xl" />
 
             <SessionTimer />
           </div>
 
           {/* Intensity Meter */}
-          <div className="grid grid-cols-3 gap-4 pt-8">
-            <div className="col-span-3 text-center mb-2">
-              <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-                Current Intensity Level
-              </span>
-            </div>
-            {[1, 2, 3].map((level) => (
-              <div
-                key={level}
-                className="h-1.5 rounded-full bg-muted overflow-hidden relative"
-              >
-                <div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-primary to-transparent w-[200%] animate-progress-beam"
-                  style={{ animationDelay: `${level * 0.5}s` }}
-                />
+          <Card className="bg-card/40 border-border/50 backdrop-blur-sm">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-2 mb-4">
+                <Activity className="h-4 w-4 text-primary" />
+                <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
+                  Focus Intensity
+                </span>
               </div>
-            ))}
-          </div>
+              <div className="grid grid-cols-3 gap-3">
+                {[1, 2, 3].map((level) => (
+                  <div
+                    key={level}
+                    className="h-2 rounded-full bg-muted/50 overflow-hidden relative"
+                  >
+                    <div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-primary to-transparent w-[200%] animate-progress-beam"
+                      style={{ animationDelay: `${level * 0.4}s` }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
 
-          {/* Motivational Mantra */}
-          <div className="text-center pt-8 opacity-60 hover:opacity-100 transition-opacity duration-500">
-            <p className="text-sm font-mono text-muted-foreground">
+          {/* Motivational Quote */}
+          <div className="text-center opacity-70 hover:opacity-100 transition-opacity duration-500">
+            <div className="inline-flex items-center gap-2 mb-2">
+              <Zap className="h-4 w-4 text-primary" />
+              <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Mantra</span>
+            </div>
+            <p className="text-sm md:text-base font-serif italic text-foreground/80">
               "Flow is not a luxury. It is a necessity."
             </p>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

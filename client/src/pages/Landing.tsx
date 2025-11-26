@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Target, Zap, Headphones } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LockInLogo } from "@/components/LockInLogo";
 
 export default function Landing() {
   return (
@@ -10,12 +11,7 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             {/* Logo Integration */}
-            <div className="flex items-center gap-2 font-black text-xl tracking-tighter">
-              <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center text-primary-foreground">
-                <Headphones className="h-5 w-5" />
-              </div>
-              <span>LOCK IN</span>
-            </div>
+            <LockInLogo />
           </div>
           <div className="flex items-center gap-2">
             <ThemeToggle />
@@ -30,7 +26,7 @@ export default function Landing() {
             <Button
               onClick={() => {
                 localStorage.setItem("testMode", "true");
-                window.location.href = "/";
+                window.location.reload();
               }}
               data-testid="button-test-enter"
               size="sm"
@@ -43,38 +39,45 @@ export default function Landing() {
       </div>
 
       {/* Hero Section */}
-      <div className="flex-1 flex items-center justify-center px-4 py-20 relative overflow-hidden">
+      <div className="flex-1 flex items-center justify-center px-4 py-20 relative overflow-auto">
         {/* Background Image */}
         <div
           className="absolute inset-0 z-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url('/lofi_mission_control_desk_1763764425522.png')`,
-            filter: "brightness(0.5) blur(0px)"
+            backgroundImage: `url('/lock_in_hero.png')`,
+            filter: "brightness(0.4) blur(0px)"
           }}
         />
 
-        {/* Overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/70 to-background/90 z-10" />
+        {/* Overlay for readability - Reduced opacity at top to show logo better */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background/90 z-10" />
 
-        <div className="max-w-5xl text-center space-y-10 relative z-20">
+        <div className="max-w-5xl text-center space-y-10 relative z-20 pt-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-medium text-sm border border-primary/20 backdrop-blur-sm animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <Sparkles className="h-4 w-4" />
-            <span>Enter the Flow State</span>
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            System Online
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-none text-foreground drop-shadow-2xl">
-            LOCK <span className="text-primary">IN.</span><br />
-            <span className="text-4xl md:text-6xl font-bold text-muted-foreground tracking-normal">SHIP RELENTLESSLY.</span>
-          </h1>
-
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto font-medium leading-relaxed">
-            Your personal mission control for deep work. Set your intention, block out the noise, and execute.
-          </p>
-
+          <div className="space-y-6">
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
+              LOCK <span className="text-primary">IN.</span>
+              <br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
+                MASTER YOUR CRAFT.
+              </span>
+            </h1>
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
+              Your personal mission control for deep work. Set your intention,
+              block out the noise, and execute.
+            </p>
+          </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
             <Button
               size="lg"
-              onClick={() => (window.location.href = "/api/login")}
+              onClick={() => (window.location.href = "/login")}
               className="h-16 px-10 text-xl bg-primary text-white hover:bg-primary/90 shadow-[0_0_30px_rgba(25,149,83,0.4)] hover:shadow-[0_0_40px_rgba(25,149,83,0.6)] transition-all duration-300 rounded-xl font-bold uppercase tracking-wide"
             >
               Initiate Protocol <ArrowRight className="ml-2 h-6 w-6" />
