@@ -28,18 +28,14 @@ export function FlowGuide({ currentStep }: FlowGuideProps) {
 
                 {steps.map((step, index) => {
                     const isCompleted = index < currentIndex;
-                    const isCurrent = index === currentIndex;
+                    // const isCurrent = index === currentIndex; // Unused if we style them all the same
 
                     return (
-                        <div key={step.id} className="flex flex-col items-center gap-2 bg-background px-2">
+                        <div key={step.id} className="flex flex-col items-center gap-2 relative z-10">
                             <div
                                 className={cn(
                                     "w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 font-mono font-bold text-sm",
-                                    isCompleted
-                                        ? "bg-primary border-primary text-primary-foreground"
-                                        : isCurrent
-                                            ? "bg-background border-primary text-primary shadow-[0_0_15px_rgba(25,149,83,0.5)] scale-110"
-                                            : "bg-muted border-muted-foreground/30 text-muted-foreground"
+                                    "bg-primary border-primary text-primary-foreground"
                                 )}
                             >
                                 {isCompleted ? <CheckCircle2 className="w-6 h-6" /> : step.number}
@@ -47,7 +43,7 @@ export function FlowGuide({ currentStep }: FlowGuideProps) {
                             <span
                                 className={cn(
                                     "text-xs font-bold uppercase tracking-wider transition-colors duration-300",
-                                    isCurrent ? "text-primary" : "text-muted-foreground"
+                                    "text-primary"
                                 )}
                             >
                                 {step.label}

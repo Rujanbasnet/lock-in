@@ -121,8 +121,8 @@ export default function JournalPage() {
           className="bg-transparent border-b-0"
         />
 
-        <div className="max-w-4xl mx-auto p-8 space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="max-w-3xl mx-auto p-8 space-y-8">
+          <div className="w-full">
             <div className="space-y-8">
               {/* Your Intention */}
               <Card className="border-primary/30 bg-primary/5 backdrop-blur-md shadow-lg">
